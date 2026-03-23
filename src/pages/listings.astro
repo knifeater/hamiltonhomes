@@ -1,0 +1,29 @@
+---
+import { properties } from "../data/properties.js";
+
+const currentListings = properties.filter((p) => p.status === "for-sale" || p.status === "under-offer");
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Current Listings | Sopo Fuifui</title>
+</head>
+<body>
+  <h1>Current Listings</h1>
+
+  {currentListings.length === 0 ? (
+    <p>No current listings yet.</p>
+  ) : (
+    currentListings.map((p) => (
+      <article>
+        <h2><a href={`/homes/${p.slug}`}>{p.title}</a></h2>
+        <p>{p.suburb}, {p.city}</p>
+        <p>{p.price}</p>
+      </article>
+    ))
+  )}
+</body>
+</html>

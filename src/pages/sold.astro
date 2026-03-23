@@ -1,0 +1,25 @@
+---
+import { properties } from "../data/properties.js";
+
+const soldListings = properties.filter((p) => p.status === "sold");
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sold Listings | Sopo Fuifui</title>
+</head>
+<body>
+  <h1>Sold Listings</h1>
+
+  {soldListings.map((p) => (
+    <article>
+      <h2><a href={`/homes/${p.slug}`}>{p.title}</a></h2>
+      <p>{p.suburb}, {p.city}</p>
+      <p>{p.price}</p>
+    </article>
+  ))}
+</body>
+</html>

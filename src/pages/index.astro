@@ -1,17 +1,1111 @@
 ---
+import { properties } from "../data/properties.js";
 
+const soldListings    = properties.filter((p) => p.status === "sold");
+const currentListings = properties.filter(
+  (p) => p.status === "for-sale" || p.status === "under-offer"
+);
+
+const featuredSold    = soldListings.slice(0, 3);
+const featuredCurrent = currentListings.slice(0, 3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sopo Fuifui | Real Estate | Harcourts Hamilton Rototuna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #162040;
+  --navy-mid:   #1E2D56;
+  --navy-light: #253570;
+  --blue:       #00AEEF;
+  --blue-mid:   #0090CC;
+  --blue-pale:  #E0F5FD;
+  --blue-ghost: rgba(0,174,239,0.08);
+  --white:      #FFFFFF;
+  --off-white:  #F5F8FC;
+  --text:       #1A2744;
+  --muted:      #7A8499;
+  --border-b:   rgba(0,174,239,0.25);
+  --border-w:   rgba(255,255,255,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;width:100%;overflow-x:hidden;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--text);overflow-x:hidden;width:100%;margin:0;padding:0;}
+
+/* ========================= NAV ========================= */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 56px;background:var(--navy);border-bottom:2px solid var(--blue);}
+.nav-left{display:flex;align-items:center;gap:20px;}
+.hc-mark{display:flex;flex-direction:column;gap:3px;}
+.hc-word{font-size:20px;font-weight:700;color:var(--white);letter-spacing:-0.01em;line-height:1;}
+.hc-bar{width:26px;height:3px;background:var(--blue);border-radius:1px;}
+.nav-sep{width:1px;height:32px;background:rgba(255,255,255,0.15);}
+.nav-agent-name{font-size:14px;font-weight:600;color:var(--white);}
+.nav-agent-role{font-size:10px;font-weight:300;color:var(--blue);letter-spacing:0.18em;text-transform:uppercase;}
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none;}
+.nav-links a{font-size:12px;font-weight:400;color:rgba(255,255,255,0.65);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.25s;}
+.nav-links a:hover{color:var(--blue);}
+.nav-cta{background:var(--blue)!important;color:var(--navy)!important;padding:10px 24px!important;border-radius:3px;font-weight:600!important;transition:background 0.25s!important;}
+.nav-cta:hover{background:#33BFFF!important;}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;cursor:pointer;background:none;border:none;padding:6px;border-radius:3px;transition:background 0.2s;flex-shrink:0;}
+.hamburger:hover{background:rgba(255,255,255,0.07);}
+.hamburger span{display:block;height:2px;background:var(--white);border-radius:2px;transition:transform 0.38s cubic-bezier(0.4,0,0.2,1),opacity 0.25s ease,width 0.3s ease;transform-origin:center;}
+.hamburger span:nth-child(1){width:22px;}
+.hamburger span:nth-child(2){width:16px;}
+.hamburger span:nth-child(3){width:22px;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);width:22px;}
+.hamburger.open span:nth-child(2){opacity:0;width:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);width:22px;}
+.mobile-menu{position:fixed;top:76px;left:0;right:0;bottom:0;z-index:290;background:var(--navy);display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;padding:40px 32px 60px;border-top:1px solid rgba(0,174,239,0.2);}
+.mobile-menu.open{transform:translateX(0);}
+.mobile-menu ul{list-style:none;display:flex;flex-direction:column;gap:4px;margin-bottom:40px;}
+.mobile-menu ul li{opacity:0;transform:translateX(24px);transition:opacity 0.35s ease,transform 0.35s ease;}
+.mobile-menu.open ul li{opacity:1;transform:translateX(0);}
+.mobile-menu.open ul li:nth-child(1){transition-delay:0.08s;}
+.mobile-menu.open ul li:nth-child(2){transition-delay:0.13s;}
+.mobile-menu.open ul li:nth-child(3){transition-delay:0.18s;}
+.mobile-menu.open ul li:nth-child(4){transition-delay:0.23s;}
+.mobile-menu ul li a{display:block;font-size:26px;font-family:'Cormorant Garamond',serif;font-weight:300;color:rgba(255,255,255,0.75);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);transition:color 0.2s;letter-spacing:0.02em;}
+.mobile-menu ul li a:hover{color:var(--blue);}
+.mobile-menu-cta{background:var(--blue);color:var(--navy);border:none;padding:16px 32px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;width:100%;opacity:0;transform:translateY(12px);transition:opacity 0.35s ease 0.3s,transform 0.35s ease 0.3s,background 0.25s;}
+.mobile-menu.open .mobile-menu-cta{opacity:1;transform:translateY(0);}
+.mobile-menu-cta:hover{background:#33BFFF;}
+.mobile-contact-row{display:flex;gap:12px;margin-top:16px;opacity:0;transform:translateY(12px);transition:opacity 0.35s ease 0.36s,transform 0.35s ease 0.36s;}
+.mobile-menu.open .mobile-contact-row{opacity:1;transform:translateY(0);}
+.mobile-contact-link{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);font-size:12px;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;padding:13px 16px;border-radius:3px;transition:border-color 0.2s,color 0.2s;}
+.mobile-contact-link:hover{border-color:var(--blue);color:var(--blue);}
+
+/* ========================= HERO ========================= */
+.hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;overflow:hidden;background:var(--navy);}
+.hero-split{position:absolute;top:0;right:0;width:52%;height:100%;background:var(--navy-mid);clip-path:polygon(12% 0,100% 0,100% 100%,0% 100%);}
+.hero-grid{position:absolute;top:0;right:0;width:52%;height:100%;clip-path:polygon(12% 0,100% 0,100% 100%,0% 100%);opacity:0.06;background-image:repeating-linear-gradient(0deg,var(--blue) 0,var(--blue) 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,var(--blue) 0,var(--blue) 1px,transparent 1px,transparent 60px);}
+.hero-glow{position:absolute;top:15%;right:10%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(0,174,239,0.2) 0%,transparent 70%);pointer-events:none;}
+.hero-accent{position:absolute;top:0;left:48%;width:2px;height:100%;background:linear-gradient(to bottom,transparent,var(--blue),transparent);opacity:0.3;}
+.hero-illo{position:absolute;right:3%;bottom:0;width:44%;max-width:620px;opacity:0.15;}
+.hero-content{position:relative;z-index:2;padding:76px 80px 0;max-width:1400px;width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:60px;}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;background:rgba(0,174,239,0.1);border:1px solid var(--border-b);border-radius:2px;padding:7px 16px;margin-bottom:28px;animation:fadeUp 0.7s 0.1s both;}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);}
+.hero-tag-txt{font-size:11px;font-weight:400;color:var(--blue);letter-spacing:0.2em;text-transform:uppercase;}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6.5vw,88px);font-weight:400;color:var(--white);line-height:0.95;letter-spacing:-0.02em;margin-bottom:24px;animation:fadeUp 0.8s 0.25s both;}
+.hero-name .first{display:block;}
+.hero-name .last{display:block;color:var(--blue);font-style:italic;}
+.hero-tagline{font-size:15px;font-weight:400;color:rgba(255,255,255,0.72);line-height:1.8;max-width:440px;margin-bottom:44px;animation:fadeUp 0.8s 0.4s both;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp 0.8s 0.5s both;}
+.btn-blue{background:var(--blue);color:var(--navy);border:none;padding:15px 34px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all 0.3s;text-decoration:none;display:inline-block;}
+.btn-blue:hover{background:#33BFFF;transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,174,239,0.35);}
+.btn-ghost-w{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.28);padding:14px 34px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all 0.3s;text-decoration:none;display:inline-block;}
+.btn-ghost-w:hover{border-color:var(--blue);color:var(--blue);}
+.hero-card{background:rgba(255,255,255,0.04);backdrop-filter:blur(16px);border:1px solid var(--border-b);border-radius:6px;padding:36px;animation:fadeUp 0.8s 0.3s both;}
+.hero-card-title{font-size:10px;font-weight:500;color:var(--blue);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:24px;}
+.h-stat-num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:400;color:var(--white);line-height:1;margin-bottom:4px;}
+.h-stat-num span{color:var(--blue);}
+.h-stat-lbl{font-size:11px;font-weight:300;color:rgba(255,255,255,0.38);letter-spacing:0.1em;}
+.hero-card-bot{background:var(--blue-ghost);border:1px solid var(--border-b);border-radius:3px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background 0.25s;}
+.hero-card-bot:hover{background:rgba(0,174,239,0.14);}
+.hcb-txt{font-size:12px;font-weight:300;color:rgba(255,255,255,0.55);}
+.hcb-arrow{color:var(--blue);font-size:16px;}
+.scroll-hint{position:absolute;bottom:36px;left:80px;display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.22);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;animation:fadeUp 1s 0.8s both;}
+.scroll-line{width:36px;height:1px;background:linear-gradient(to right,var(--blue),transparent);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+
+/* ========================= TRUST BAR ========================= */
+.trust-bar{background:var(--white);padding:20px 80px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(22,32,64,0.08);box-shadow:0 2px 18px rgba(22,32,64,0.06);flex-wrap:wrap;gap:16px;}
+.trust-items{display:flex;align-items:center;gap:32px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:400;color:var(--muted);}
+.t-icon{width:18px;height:18px;color:var(--blue);flex-shrink:0;}
+.trust-sep{width:1px;height:22px;background:rgba(22,32,64,0.08);}
+.trust-hc{display:flex;align-items:center;gap:10px;}
+.thc-logo{font-size:16px;font-weight:700;color:var(--navy);}
+.thc-sub{display:flex;flex-direction:column;gap:2px;}
+.thc-line{width:20px;height:2.5px;background:var(--blue);border-radius:1px;}
+.thc-label{font-size:10px;font-weight:300;color:var(--muted);letter-spacing:0.1em;}
+
+/* ========================= SHARED SECTION ========================= */
+.section{padding:96px 80px;max-width:1400px;margin:0 auto;}
+.sec-eyebrow{display:flex;align-items:center;gap:11px;font-size:11px;font-weight:500;color:var(--blue);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:11px;}
+.sec-line{width:26px;height:2px;background:var(--blue);border-radius:1px;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);font-weight:400;color:var(--navy);line-height:1.05;}
+.sec-title em{font-style:italic;color:var(--blue-mid);}
+.sec-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:52px;}
+.view-all{font-size:12px;font-weight:500;color:var(--navy);text-decoration:none;letter-spacing:0.1em;text-transform:uppercase;display:flex;align-items:center;gap:6px;padding-bottom:2px;border-bottom:2px solid var(--blue);transition:color 0.2s;}
+.view-all:hover{color:var(--blue);}
+
+/* Sold section — white background to visually separate from off-white */
+.sold-wrap{background:var(--white);}
+
+/* ========================= LISTINGS / CARDS ========================= */
+.listings-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:20px;}
+.col-right{display:flex;flex-direction:column;gap:20px;}
+.pcard{position:relative;border-radius:6px;overflow:hidden;cursor:pointer;background:var(--navy);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1),box-shadow 0.35s;text-decoration:none;display:block;}
+.pcard:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(22,32,64,0.22);}
+.pcard:hover .pimg-inner{transform:scale(1.04);}
+.pimg{overflow:hidden;}
+.pcard.lg .pimg{height:560px;}
+.pcard.sm .pimg{height:258px;}
+.pimg-inner{width:100%;height:100%;transition:transform 0.55s ease;display:flex;align-items:flex-end;justify-content:center;}
+.pb1{background:linear-gradient(160deg,#2A3F7A 0%,#162040 50%,#0D1830 100%);}
+.pb2{background:linear-gradient(160deg,#1E4060 0%,#122840 50%,#0A1C2C 100%);}
+.pb3{background:linear-gradient(160deg,#2A4060 0%,#162040 60%,#101828 100%);}
+.c-house{opacity:0.18;}
+.poverlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(22,32,64,0.96) 0%,rgba(22,32,64,0.25) 50%,transparent 100%);}
+.pbody{position:absolute;bottom:0;left:0;right:0;padding:24px;}
+.pbadge{display:inline-block;padding:4px 12px;border-radius:2px;font-size:9px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;margin-bottom:10px;}
+.b-sale{background:var(--blue);color:var(--navy);}
+.b-offer{background:rgba(255,174,0,0.25);color:rgba(255,210,100,0.95);}
+.b-sold{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);}
+.paddress{font-family:'Cormorant Garamond',serif;color:var(--white);line-height:1.2;margin-bottom:3px;}
+.pcard.lg .paddress{font-size:28px;font-weight:400;}
+.pcard.sm .paddress{font-size:20px;font-weight:400;}
+.psuburb{font-size:12px;font-weight:300;color:rgba(255,255,255,0.44);letter-spacing:0.08em;margin-bottom:13px;}
+.pfooter{display:flex;align-items:center;justify-content:space-between;padding-top:11px;border-top:1px solid rgba(255,255,255,0.1);}
+.pspecs{display:flex;gap:13px;}
+.pspec{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:300;color:rgba(255,255,255,0.52);}
+.pprice{font-family:'Cormorant Garamond',serif;color:var(--blue);font-weight:400;}
+.pcard.lg .pprice{font-size:26px;}
+.pcard.sm .pprice{font-size:21px;}
+.badge360{position:absolute;top:16px;right:16px;background:rgba(22,32,64,0.8);backdrop-filter:blur(8px);border:1px solid var(--border-b);border-radius:20px;padding:6px 14px;display:flex;align-items:center;gap:7px;transition:background 0.25s;cursor:pointer;}
+.badge360:hover{background:var(--blue);}
+.badge360 svg{color:var(--blue);transition:color 0.25s;}
+.badge360:hover svg{color:var(--navy);}
+.badge360 span{font-size:10px;font-weight:600;color:var(--blue);letter-spacing:0.15em;transition:color 0.25s;}
+.badge360:hover span{color:var(--navy);}
+.open-home-tag{position:absolute;top:16px;left:16px;background:var(--blue);color:var(--navy);font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;padding:5px 12px;border-radius:2px;}
+
+/* Empty state */
+.no-listings{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 40px;border:1px dashed rgba(0,174,239,0.2);border-radius:6px;background:rgba(0,174,239,0.02);}
+.no-listings-icon{color:var(--blue);opacity:0.35;margin-bottom:20px;}
+.no-listings-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--navy);margin-bottom:8px;}
+.no-listings-text{font-size:13px;font-weight:300;color:var(--muted);line-height:1.7;max-width:360px;}
+
+/* ========================= DETAIL PREVIEW ========================= */
+.detail-wrap{background:var(--navy);padding:100px 0 80px;}
+.detail-inner{max-width:1400px;margin:0 auto;padding:0 80px;}
+.detail-intro{text-align:center;margin-bottom:60px;}
+.detail-intro .sec-eyebrow{justify-content:center;}
+.detail-intro .sec-title{color:var(--white);}
+.detail-intro .sec-title em{color:var(--blue);}
+.dcard{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;overflow:hidden;}
+.dtopbar{background:rgba(0,174,239,0.06);border-bottom:1px solid rgba(0,174,239,0.13);padding:18px 32px;display:flex;align-items:center;justify-content:space-between;}
+.dcrumb{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:300;color:rgba(255,255,255,0.32);letter-spacing:0.04em;}
+.dcrumb-sep{color:var(--blue);opacity:0.45;}
+.dcrumb-cur{color:rgba(255,255,255,0.65);}
+.dstatus{display:flex;align-items:center;gap:8px;}
+.dstatus-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.dstatus-txt{font-size:11px;font-weight:500;color:var(--blue);letter-spacing:0.15em;text-transform:uppercase;}
+.dheader{padding:32px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start;border-bottom:1px solid rgba(255,255,255,0.07);}
+.d-eyebrow{font-size:11px;font-weight:400;color:var(--blue);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.d-eyebrow::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:1px;display:block;}
+.d-addr{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:400;color:var(--white);line-height:1;margin-bottom:6px;}
+.d-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,0.38);letter-spacing:0.06em;}
+.d-price-col{text-align:right;}
+.d-price-label{font-size:10px;font-weight:400;color:rgba(255,255,255,0.28);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;}
+.d-price-num{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:400;color:var(--blue);line-height:1;margin-bottom:14px;}
+.btn-enq{background:var(--blue);color:var(--navy);border:none;padding:13px 26px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;width:100%;transition:background 0.25s;}
+.btn-enq:hover{background:#33BFFF;}
+.dgallery{display:grid;grid-template-columns:1.8fr 1fr;grid-template-rows:280px 190px;gap:6px;padding:6px;}
+.gcell{border-radius:4px;overflow:hidden;position:relative;}
+.gcell.main{grid-row:1/3;}
+.gph{width:100%;height:100%;transition:transform 0.4s ease;}
+.gcell:hover .gph{transform:scale(1.04);}
+.g1{background:linear-gradient(145deg,#3A5090 0%,#1E2D56 50%,#162040 100%);}
+.g2{background:linear-gradient(145deg,#2A4070 0%,#162040 100%);}
+.g3{background:linear-gradient(145deg,#2A3A68 0%,#131C38 100%);}
+.g-count{position:absolute;bottom:12px;left:12px;background:rgba(22,32,64,0.8);backdrop-filter:blur(6px);color:rgba(255,255,255,0.6);font-size:10px;letter-spacing:0.1em;padding:5px 11px;border-radius:2px;}
+.g-tour-ov{position:absolute;inset:0;background:rgba(22,32,64,0.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:background 0.25s;}
+.g-tour-ov:hover{background:rgba(22,32,64,0.25);}
+.g-ring{width:58px;height:58px;border-radius:50%;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;transition:all 0.25s;}
+.g-tour-ov:hover .g-ring{background:var(--blue);transform:scale(1.08);}
+.g-tour-ov:hover .g-ring svg{stroke:var(--navy)!important;}
+.g-tour-lbl{font-size:11px;font-weight:500;color:var(--white);letter-spacing:0.18em;text-transform:uppercase;}
+.dspecs{display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid rgba(255,255,255,0.07);border-bottom:1px solid rgba(255,255,255,0.07);}
+.dspec{padding:22px;border-right:1px solid rgba(255,255,255,0.07);}
+.dspec:last-child{border-right:none;}
+.dspec-ico{color:var(--blue);margin-bottom:8px;}
+.dspec-val{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--white);line-height:1;margin-bottom:4px;}
+.dspec-unit{font-size:12px;font-weight:500;color:rgba(255,255,255,0.6);}
+.dspec-lbl{font-size:10px;font-weight:500;color:rgba(255,255,255,0.55);letter-spacing:0.12em;text-transform:uppercase;}
+.dbody{display:grid;grid-template-columns:1.2fr 1fr;border-top:1px solid rgba(255,255,255,0.07);}
+.ddesc{padding:32px;border-right:1px solid rgba(255,255,255,0.07);}
+.ddesc-hd{font-size:10px;font-weight:500;color:var(--blue);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.ddesc-hd::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:1px;}
+.ddesc p{font-size:14px;font-weight:400;color:rgba(255,255,255,0.72);line-height:1.85;margin-bottom:18px;}
+.dfeats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:20px;}
+.dfeat{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:300;color:rgba(255,255,255,0.48);}
+.fdot{width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;}
+.dtour{padding:32px;}
+.dtour-hd{font-size:10px;font-weight:500;color:var(--blue);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;}
+.tlive{font-size:9px;background:rgba(0,174,239,0.1);color:var(--blue);border:1px solid var(--border-b);padding:3px 10px;border-radius:20px;letter-spacing:0.1em;display:flex;align-items:center;gap:6px;}
+.tview{position:relative;border-radius:5px;overflow:hidden;height:220px;background:linear-gradient(135deg,#0D1830 0%,#162040 100%);display:flex;align-items:center;justify-content:center;margin-bottom:12px;border:1px solid rgba(0,174,239,0.12);}
+.tgrid{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(0,174,239,0.06) 0,rgba(0,174,239,0.06) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,rgba(0,174,239,0.06) 0,rgba(0,174,239,0.06) 1px,transparent 1px,transparent 40px);}
+.tsphere{width:155px;height:155px;border-radius:50%;background:radial-gradient(ellipse at 38% 35%,#2A4080 0%,#162040 55%,#0A1220 100%);border:1px solid rgba(0,174,239,0.18);box-shadow:0 0 55px rgba(0,174,239,0.1);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.tsphere::after{content:'';position:absolute;top:12%;left:18%;width:32%;height:17%;border-radius:50%;background:rgba(255,255,255,0.05);filter:blur(4px);}
+.ts-lbl{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:rgba(255,255,255,0.58);z-index:1;}
+.tplay{position:absolute;width:50px;height:50px;border-radius:50%;background:var(--blue);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;animation:tpulse 2.2s infinite;transition:transform 0.25s;}
+.tplay:hover{transform:scale(1.1);}
+@keyframes tpulse{0%{box-shadow:0 0 0 0 rgba(0,174,239,0.45)}70%{box-shadow:0 0 0 18px rgba(0,174,239,0)}100%{box-shadow:0 0 0 0 rgba(0,174,239,0)}}
+.thint{position:absolute;bottom:10px;font-size:10px;color:rgba(255,255,255,0.22);letter-spacing:0.08em;}
+.trooms{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;}
+.rmbtn{padding:6px 14px;border-radius:2px;border:1px solid rgba(255,255,255,0.1);background:transparent;color:rgba(255,255,255,0.42);font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0.06em;cursor:pointer;transition:all 0.2s;}
+.rmbtn.on,.rmbtn:hover{background:rgba(0,174,239,0.1);border-color:var(--blue);color:var(--blue);}
+.tfooter{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid rgba(255,255,255,0.07);}
+.tf-hint{font-size:10px;font-weight:300;color:rgba(255,255,255,0.22);letter-spacing:0.08em;}
+.tf-fs{background:none;border:1px solid var(--border-b);border-radius:2px;padding:7px 14px;color:var(--blue);font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all 0.2s;}
+.tf-fs:hover{background:rgba(0,174,239,0.1);}
+
+/* ========================= AGENT ========================= */
+.agent-sec{background:var(--off-white);padding:100px 80px;}
+.agent-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:360px 1fr;gap:80px;align-items:center;}
+.aphoto-outer{position:relative;}
+.aphoto-outer::before{content:'';position:absolute;left:-12px;top:32px;bottom:32px;width:4px;background:linear-gradient(to bottom,transparent,var(--blue),transparent);border-radius:2px;}
+.aphoto{width:100%;aspect-ratio:4/5;border-radius:5px;overflow:hidden;background:linear-gradient(160deg,#1E2D56 0%,#162040 60%,#0D1428 100%);position:relative;}
+.aphoto-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.asilhouette{opacity:0.14;width:68%;}
+.aphoto-lbl{font-size:12px;font-weight:300;color:rgba(255,255,255,0.28);letter-spacing:0.15em;text-transform:uppercase;text-align:center;}
+.aphoto-tag{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(to top,rgba(22,32,64,0.95),transparent);text-align:center;opacity:0;transform:translateY(10px);backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);transition:opacity 0.45s cubic-bezier(0.4,0,0.2,1),transform 0.45s cubic-bezier(0.4,0,0.2,1),backdrop-filter 0.45s ease,-webkit-backdrop-filter 0.45s ease;}
+.aphoto-outer:hover .aphoto-tag{opacity:1;transform:translateY(0);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+.ahc-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(0,174,239,0.09);border:1px solid var(--border-b);border-radius:3px;padding:8px 16px;}
+.ahc-logo{font-size:13px;font-weight:700;color:var(--white);line-height:1;}
+.ahc-ln{width:17px;height:2px;background:var(--blue);border-radius:1px;margin-top:2px;}
+.ahc-lbl{font-size:10px;font-weight:300;color:rgba(255,255,255,0.38);letter-spacing:0.1em;}
+.a-eyebrow{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:500;color:var(--blue);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:16px;}
+.aname{font-family:'Cormorant Garamond',serif;font-size:58px;font-weight:400;color:var(--navy);line-height:0.95;margin-bottom:8px;}
+.aname em{font-style:italic;color:var(--blue-mid);}
+.acompany{font-size:13px;font-weight:400;color:var(--muted);letter-spacing:0.1em;margin-bottom:30px;}
+.abio{font-size:15px;font-weight:400;color:#374060;line-height:1.85;max-width:540px;margin-bottom:28px;}
+.aspec-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.aspec-tag{background:var(--blue-pale);color:var(--blue-mid);font-size:11px;font-weight:500;letter-spacing:0.06em;padding:6px 14px;border-radius:20px;border:1px solid rgba(0,144,204,0.2);}
+.astats{display:flex;gap:32px;padding:26px 0;border-top:1px solid rgba(22,32,64,0.08);border-bottom:1px solid rgba(22,32,64,0.08);margin-bottom:34px;}
+.asn{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:400;color:var(--navy);line-height:1;margin-bottom:4px;}
+.asn span{color:var(--blue);}
+.asl{font-size:11px;font-weight:300;color:var(--muted);letter-spacing:0.1em;}
+.abtns{display:flex;gap:12px;}
+.btn-navy{background:var(--navy);color:var(--white);border:none;padding:15px 32px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:background 0.25s;text-decoration:none;display:inline-block;}
+.btn-navy:hover{background:var(--navy-light);}
+.btn-outline-n{background:transparent;color:var(--navy);border:1px solid rgba(22,32,64,0.22);padding:14px 32px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:400;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all 0.25s;text-decoration:none;display:inline-block;}
+.btn-outline-n:hover{border-color:var(--blue);color:var(--blue);}
+
+/* ========================= CONTACT FORM ========================= */
+.contact-section{background:var(--navy);padding:100px 80px;}
+.contact-inner{max-width:1100px;margin:0 auto;}
+.contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:start;}
+.contact-left .sec-title{color:var(--white);}
+.contact-left .sec-title em{color:var(--blue);}
+.contact-left .sec-eyebrow{margin-bottom:11px;}
+.contact-desc{font-size:15px;font-weight:400;color:rgba(255,255,255,0.72);line-height:1.8;margin-top:20px;margin-bottom:40px;}
+.contact-details{display:flex;flex-direction:column;gap:20px;}
+.cdl{font-size:9px;font-weight:500;color:rgba(255,255,255,0.22);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:4px;}
+.cdv{font-size:14px;font-weight:300;color:rgba(255,255,255,0.55);}
+.cdv a{color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s;}
+.cdv a:hover{color:var(--blue);}
+.form-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:40px;}
+.form-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--white);margin-bottom:6px;}
+.form-subtitle{font-size:12px;font-weight:400;color:rgba(255,255,255,0.35);letter-spacing:0.06em;margin-bottom:32px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.form-group{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;}
+.form-group.half{margin-bottom:0;}
+.form-label{font-size:10px;font-weight:500;color:rgba(255,255,255,0.4);letter-spacing:0.2em;text-transform:uppercase;}
+.form-input{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:3px;padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:var(--white);outline:none;transition:border-color 0.25s,background 0.25s;width:100%;}
+.form-input::placeholder{color:rgba(255,255,255,0.22);}
+.form-input:focus{border-color:var(--blue);background:rgba(0,174,239,0.05);}
+.custom-select{position:relative;}
+.cs-trigger{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:3px;padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:rgba(255,255,255,0.4);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:border-color 0.25s,background 0.25s;user-select:none;}
+.cs-trigger.selected{color:var(--white);}
+.cs-trigger:hover,.cs-trigger.open{border-color:var(--blue);background:rgba(0,174,239,0.05);}
+.cs-arrow{width:18px;height:18px;flex-shrink:0;color:rgba(255,255,255,0.3);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1),color 0.25s;}
+.cs-trigger.open .cs-arrow{transform:rotate(180deg);color:var(--blue);}
+.cs-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:50;background:var(--navy-mid);border:1px solid var(--border-b);border-radius:4px;overflow:hidden;max-height:0;opacity:0;transition:max-height 0.38s cubic-bezier(0.4,0,0.2,1),opacity 0.25s ease;box-shadow:0 16px 48px rgba(0,0,0,0.4);}
+.cs-dropdown.open{max-height:320px;opacity:1;}
+.cs-option{padding:12px 16px;font-size:13px;font-weight:300;color:rgba(255,255,255,0.6);cursor:pointer;display:flex;align-items:center;gap:10px;transition:background 0.18s,color 0.18s;border-bottom:1px solid rgba(255,255,255,0.05);}
+.cs-option:last-child{border-bottom:none;}
+.cs-option:hover{background:rgba(0,174,239,0.1);color:var(--white);}
+.cs-option.picked{background:rgba(0,174,239,0.08);color:var(--blue);}
+.cs-option-dot{width:5px;height:5px;border-radius:50%;background:transparent;flex-shrink:0;transition:background 0.18s;}
+.cs-option:hover .cs-option-dot,.cs-option.picked .cs-option-dot{background:var(--blue);}
+.form-textarea{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:3px;padding:13px 16px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:300;color:var(--white);outline:none;resize:vertical;min-height:110px;transition:border-color 0.25s,background 0.25s;width:100%;}
+.form-textarea::placeholder{color:rgba(255,255,255,0.22);}
+.form-textarea:focus{border-color:var(--blue);background:rgba(0,174,239,0.05);}
+.form-submit{width:100%;background:var(--blue);color:var(--navy);border:none;padding:16px 32px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;border-radius:3px;margin-top:8px;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px;}
+.form-submit:hover{background:#33BFFF;box-shadow:0 8px 28px rgba(0,174,239,0.3);}
+.form-submit svg{transition:transform 0.25s;}
+.form-submit:hover svg{transform:translateX(4px);}
+.form-privacy{font-size:11px;font-weight:300;color:rgba(255,255,255,0.22);text-align:center;margin-top:14px;line-height:1.6;}
+.form-success{display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:56px 24px 48px;gap:20px;}
+.form-success.show{display:flex;animation:successIn 0.5s cubic-bezier(0.4,0,0.2,1) both;}
+@keyframes successIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.success-icon{width:72px;height:72px;border-radius:50%;background:rgba(0,174,239,0.1);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;animation:iconPop 0.5s 0.15s cubic-bezier(0.34,1.56,0.64,1) both;}
+@keyframes iconPop{from{transform:scale(0.5);opacity:0;}to{transform:scale(1);opacity:1;}}
+.success-check{stroke-dasharray:30;stroke-dashoffset:30;animation:drawCheck 0.45s 0.4s ease forwards;}
+@keyframes drawCheck{to{stroke-dashoffset:0;}}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:400;color:var(--white);animation:successIn 0.4s 0.3s both;}
+.success-msg{font-size:14px;font-weight:400;color:rgba(255,255,255,0.6);line-height:1.75;max-width:300px;animation:successIn 0.4s 0.4s both;}
+.success-reset{margin-top:8px;background:transparent;border:1px solid var(--border-b);border-radius:3px;padding:12px 28px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--blue);letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:background 0.25s,border-color 0.25s;animation:successIn 0.4s 0.55s both;}
+.success-reset:hover{background:rgba(0,174,239,0.1);border-color:var(--blue);}
+
+/* ========================= FOOTER ========================= */
+footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blue);}
+.footer-inner{max-width:1400px;margin:0 auto;}
+.ftop{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:56px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.07);}
+.fln{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:var(--white);margin-bottom:2px;}
+.fln em{font-style:italic;color:var(--blue);}
+.fls{font-size:10px;font-weight:300;color:var(--blue);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:16px;}
+.fbio{font-size:13px;font-weight:400;color:rgba(255,255,255,0.32);line-height:1.75;max-width:270px;}
+.fch{font-size:10px;font-weight:600;color:rgba(255,255,255,0.45);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:18px;}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:11px;}
+.flinks a{font-size:13px;font-weight:300;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;}
+.flinks a:hover{color:var(--blue);}
+.fcontact{display:flex;flex-direction:column;gap:15px;}
+.fci-lbl{font-size:9px;font-weight:500;color:rgba(255,255,255,0.2);letter-spacing:0.22em;text-transform:uppercase;margin-bottom:2px;}
+.fci-val{font-size:13px;font-weight:300;color:rgba(255,255,255,0.46);}
+.fci-val a{color:rgba(255,255,255,0.46);text-decoration:none;transition:color 0.2s;}
+.fci-val a:hover{color:var(--blue);}
+.fbot-wrap{border-top:1px solid rgba(255,255,255,0.07);}
+.fbot-main{display:flex;align-items:center;justify-content:space-between;padding:24px 0 28px;gap:16px;flex-wrap:wrap;}
+.fcopy{font-size:11px;font-weight:300;color:rgba(255,255,255,0.22);letter-spacing:0.04em;}
+.fmp{font-size:11px;font-weight:300;color:rgba(255,255,255,0.22);letter-spacing:0.04em;}
+.fmp a{color:var(--blue);text-decoration:none;font-weight:400;opacity:0.75;transition:all 0.2s;}
+.fmp a:hover{color:#33BFFF;opacity:1;}
+.fhc{display:flex;align-items:center;gap:10px;}
+.fhc-txt{font-size:10px;font-weight:300;color:rgba(255,255,255,0.18);letter-spacing:0.1em;text-transform:uppercase;}
+.fhc-logo{font-size:13px;font-weight:700;color:rgba(255,255,255,0.44);line-height:1;}
+.fhc-ln{width:16px;height:2px;background:var(--blue);border-radius:1px;opacity:0.55;margin-top:3px;}
+
+/* ========================= RESPONSIVE ========================= */
+@media(max-width:1024px){
+  nav{padding:0 28px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .hero-content{grid-template-columns:1fr;padding:90px 40px 60px;}
+  .hero-split,.hero-grid,.hero-glow,.hero-accent,.hero-illo{display:none;}
+  .hero-card{display:none;}
+  .scroll-hint{left:40px;}
+  .trust-bar{padding:16px 28px;}
+  .trust-sep{display:none;}
+  .section{padding:72px 28px;}
+  .sec-header{flex-direction:column;align-items:flex-start;gap:16px;}
+  .listings-grid{grid-template-columns:1fr;}
+  .pcard.lg .pimg{height:340px;}
+  .detail-wrap{padding:72px 0 60px;}
+  .detail-inner{padding:0 28px;}
+  .dheader{grid-template-columns:1fr;}
+  .d-price-col{text-align:left;}
+  .dspecs{grid-template-columns:repeat(3,1fr);}
+  .dgallery{grid-template-columns:1fr;grid-template-rows:260px 180px 180px;}
+  .gcell.main{grid-row:auto;}
+  .dbody{grid-template-columns:1fr;}
+  .ddesc{border-right:none;border-bottom:1px solid rgba(255,255,255,0.07);}
+  .agent-sec{padding:72px 28px;}
+  .agent-inner{grid-template-columns:1fr;}
+  .aphoto{aspect-ratio:4/3;max-width:380px;}
+  .contact-section{padding:72px 28px;}
+  .contact-grid{grid-template-columns:1fr;gap:48px;}
+  footer{padding:60px 28px 0;}
+  .ftop{grid-template-columns:1fr 1fr;gap:36px;}
+  .fbot-main{flex-direction:column;align-items:flex-start;gap:10px;padding:20px 0 24px;}
+}
+@media(max-width:600px){
+  nav{padding:0 20px;}
+  .hero-content{padding:88px 20px 40px;}
+  .hero-btns{flex-direction:column;}
+  .btn-blue,.btn-ghost-w{width:100%;text-align:center;}
+  .trust-bar{padding:14px 20px;}
+  .trust-items{gap:16px;}
+  .trust-item{font-size:12px;}
+  .section{padding:60px 20px;}
+  .detail-inner{padding:0 20px;}
+  .d-addr{font-size:32px;}
+  .d-price-num{font-size:34px;}
+  .dspecs{grid-template-columns:repeat(2,1fr);}
+  .form-row{grid-template-columns:1fr;}
+  .agent-sec{padding:60px 20px;}
+  .aname{font-size:48px;}
+  .astats{gap:20px;}
+  .abtns{flex-direction:column;}
+  .btn-navy,.btn-outline-n{width:100%;text-align:center;}
+  .contact-section{padding:60px 20px;}
+  .form-card{padding:28px 20px;}
+  footer{padding:48px 20px 0;}
+  .ftop{grid-template-columns:1fr;}
+  .fbot-main{font-size:10px;}
+}
+</style>
+</head>
+
+<!-- ===================== NAV ===================== -->
+<nav>
+  <div class="nav-left">
+    <div class="hc-mark"><div class="hc-word">Harcourts</div><div class="hc-bar"></div></div>
+    <div class="nav-sep"></div>
+    <div>
+      <div class="nav-agent-name">Sopo Fuifui</div>
+      <div class="nav-agent-role">Licensed Sales Consultant</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#listings">Listings</a></li>
+    <li><a href="#tours">360° Tours</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Enquire</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#listings" class="mobile-link">Listings</a></li>
+    <li><a href="#tours" class="mobile-link">360° Tours</a></li>
+    <li><a href="#about" class="mobile-link">About</a></li>
+    <li><a href="#contact" class="mobile-link">Contact</a></li>
+  </ul>
+  <a href="#contact" class="mobile-menu-cta mobile-link" style="text-align:center;display:block;">Enquire Now</a>
+  <div class="mobile-contact-row">
+    <a href="tel:02102667154" class="mobile-contact-link mobile-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Call
+    </a>
+    <a href="mailto:sopo.fuifui@harcourts.co.nz" class="mobile-contact-link mobile-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email
+    </a>
+  </div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-split"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-accent"></div>
+  <svg class="hero-illo" viewBox="0 0 700 500" fill="none">
+    <rect x="100" y="250" width="500" height="250" fill="white"/>
+    <polygon points="60,250 350,60 640,250" fill="white"/>
+    <rect x="420" y="340" width="160" height="160" fill="rgba(0,0,0,0.15)"/>
+    <rect x="200" y="360" width="90" height="140" fill="rgba(0,0,0,0.2)"/>
+    <rect x="130" y="300" width="100" height="75" fill="rgba(0,0,0,0.12)"/>
+    <rect x="315" y="295" width="88" height="68" fill="rgba(0,0,0,0.12)"/>
+    <rect x="490" y="270" width="40" height="88" fill="white"/>
+  </svg>
+  <div class="hero-content">
+    <div>
+      <div class="hero-tag"><div class="hero-tag-dot"></div><div class="hero-tag-txt">Hamilton · Ngāruawāhia · Raglan</div></div>
+      <h1 class="hero-name"><span class="first">Your Home.</span><span class="last">Your Story.</span></h1>
+      <p class="hero-tagline">Real estate is not just about property, it is about people. Helping first home buyers, families, and investors across Hamilton find their perfect place with honesty, integrity, and hard work.</p>
+      <div class="hero-btns">
+        <a href="#listings" class="btn-blue">View Listings</a>
+        <a href="#tours" class="btn-ghost-w">360° Virtual Tours</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-title">Sopo's Track Record</div>
+      <div class="hero-stats">
+        <div><div class="h-stat-num">10<span>+</span></div><div class="h-stat-lbl">Homes Per Year</div></div>
+        <div><div class="h-stat-num">Top<span> 10</span></div><div class="h-stat-lbl">Ranked Twice</div></div>
+        <div><div class="h-stat-num">8<span>★</span></div><div class="h-stat-lbl">Client Reviews</div></div>
+        <div><div class="h-stat-num">5<span>★</span></div><div class="h-stat-lbl">Average Rating</div></div>
+      </div>
+      <div class="hero-card-bot"><div class="hcb-txt">See current listings</div><div class="hcb-arrow">→</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>Scroll to explore</div>
+</section>
+
+<!-- ===================== TRUST BAR ===================== -->
+<div class="trust-bar">
+  <div class="trust-items">
+    <div class="trust-item"><svg class="t-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Licensed REAA 2008</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><svg class="t-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Hamilton · Ngāruawāhia · Raglan</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><svg class="t-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/><path d="M2 12h20"/></svg>360° Virtual Tours</div>
+    <div class="trust-sep"></div>
+    <div class="trust-item"><svg class="t-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>Ranked Top 10 Twice</div>
+  </div>
+  <div class="trust-hc">
+    <div class="thc-logo">Harcourts</div>
+    <div class="thc-sub"><div class="thc-line"></div><div class="thc-label">Hamilton Rototuna</div></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 1. CURRENT LISTINGS — dynamic, shown first after hero        -->
+<!-- ============================================================ -->
+<div id="listings">
+  <div class="section">
+    <div class="sec-header">
+      <div>
+        <div class="sec-eyebrow"><div class="sec-line"></div>Available Now</div>
+        <h2 class="sec-title">Current <em>Listings</em></h2>
+      </div>
+      <a href="/listings" class="view-all">View All Listings &nbsp;→</a>
+    </div>
+
+    <div class="listings-grid">
+      {featuredCurrent.length > 0 ? (
+        <>
+          {/* Large card — first current listing */}
+          <a href={`/homes/${featuredCurrent[0].slug}`} class="pcard lg">
+            <div class="pimg pb1">
+              {featuredCurrent[0].gallery?.[0] ? (
+                <img src={featuredCurrent[0].gallery[0].src} alt={featuredCurrent[0].gallery[0].alt}
+                  style="width:100%;height:100%;object-fit:cover;display:block;" />
+              ) : (
+                <div class="pimg-inner">
+                  <svg class="c-house" width="380" height="260" viewBox="0 0 380 260">
+                    <rect x="40" y="130" width="300" height="130" fill="white"/>
+                    <polygon points="15,130 190,25 365,130" fill="white"/>
+                    <rect x="250" y="190" width="80" height="70" fill="rgba(0,0,0,0.15)"/>
+                    <rect x="115" y="200" width="60" height="60" fill="rgba(0,0,0,0.2)"/>
+                    <rect x="55" y="165" width="65" height="50" fill="rgba(0,0,0,0.12)"/>
+                    <rect x="190" y="160" width="55" height="45" fill="rgba(0,0,0,0.12)"/>
+                  </svg>
+                </div>
+              )}
+            </div>
+            <div class="poverlay"></div>
+            {featuredCurrent[0].openHome && (
+              <div class="open-home-tag">Open {featuredCurrent[0].openHome.date} · {featuredCurrent[0].openHome.time}</div>
+            )}
+            {featuredCurrent[0].tourUrl && (
+              <div class="badge360">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/><path d="M2 12h20"/></svg>
+                <span>360° Tour</span>
+              </div>
+            )}
+            <div class="pbody">
+              <div class={`pbadge ${featuredCurrent[0].status === "under-offer" ? "b-offer" : "b-sale"}`}>
+                {featuredCurrent[0].status === "under-offer" ? "Under Offer" : "For Sale"}
+              </div>
+              <div class="paddress">{featuredCurrent[0].title}</div>
+              <div class="psuburb">{featuredCurrent[0].suburb} · {featuredCurrent[0].city} {featuredCurrent[0].postcode ?? ""}</div>
+              <div class="pfooter">
+                <div class="pspecs">
+                  <div class="pspec">{featuredCurrent[0].bedrooms} bed</div>
+                  <div class="pspec">{featuredCurrent[0].bathrooms} bath</div>
+                  {featuredCurrent[0].parking && <div class="pspec">{featuredCurrent[0].parking} parking</div>}
+                </div>
+                <div class="pprice">{featuredCurrent[0].price}</div>
+              </div>
+            </div>
+          </a>
+
+          {/* Two smaller cards — 2nd and 3rd current listings */}
+          <div class="col-right">
+            {featuredCurrent.slice(1, 3).map((property, index) => (
+              <a href={`/homes/${property.slug}`} class="pcard sm">
+                <div class={`pimg ${index === 0 ? "pb2" : "pb3"}`}>
+                  {property.gallery?.[0] ? (
+                    <img src={property.gallery[0].src} alt={property.gallery[0].alt}
+                      style="width:100%;height:100%;object-fit:cover;display:block;" />
+                  ) : (
+                    <div class="pimg-inner">
+                      <svg class="c-house" width="260" height="178" viewBox="0 0 260 178">
+                        <rect x="20" y="90" width="220" height="88" fill="white"/>
+                        <polygon points="5,90 130,18 255,90" fill="white"/>
+                        <rect x="168" y="132" width="55" height="46" fill="rgba(0,0,0,0.15)"/>
+                        <rect x="88" y="138" width="46" height="40" fill="rgba(0,0,0,0.2)"/>
+                        <rect x="28" y="114" width="44" height="34" fill="rgba(0,0,0,0.12)"/>
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <div class="poverlay"></div>
+                {property.openHome && (
+                  <div class="open-home-tag">Open {property.openHome.date}</div>
+                )}
+                <div class="pbody">
+                  <div class={`pbadge ${property.status === "under-offer" ? "b-offer" : "b-sale"}`}>
+                    {property.status === "under-offer" ? "Under Offer" : "For Sale"}
+                  </div>
+                  <div class="paddress">{property.title}</div>
+                  <div class="psuburb">{property.suburb} · {property.city} {property.postcode ?? ""}</div>
+                  <div class="pfooter">
+                    <div class="pspecs">
+                      <div class="pspec">{property.bedrooms} bed</div>
+                      <div class="pspec">{property.bathrooms} bath</div>
+                      {property.parking && <div class="pspec">{property.parking} parking</div>}
+                    </div>
+                    <div class="pprice">{property.price}</div>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </>
+      ) : (
+        /* Empty state — shown when no current listings exist */
+        <div class="no-listings">
+          <svg class="no-listings-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <div class="no-listings-title">New Listings Coming Soon</div>
+          <div class="no-listings-text">Sopo is actively working on exciting new properties. Get in touch to be notified as soon as something hits the market.</div>
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. 360° TOUR PREVIEW                                         -->
+<!-- ============================================================ -->
+<div id="tours" class="detail-wrap">
+  <div class="detail-inner">
+    <div class="detail-intro">
+      <div class="sec-eyebrow" style="justify-content:center;"><div class="sec-line"></div>When a buyer clicks a property<div class="sec-line"></div></div>
+      <h2 class="sec-title" style="color:var(--white);margin-top:12px;">Property <em>Detail</em> Page</h2>
+    </div>
+    <div class="dcard">
+      <div class="dtopbar">
+        <div class="dcrumb"><span>Listings</span><span class="dcrumb-sep">›</span><span>Nawton</span><span class="dcrumb-sep">›</span><span class="dcrumb-cur">12A Karaka Street</span></div>
+        <div class="dstatus"><div class="dstatus-dot"></div><div class="dstatus-txt">Active Listing</div></div>
+      </div>
+      <div class="dheader">
+        <div>
+          <div class="d-eyebrow">Nawton · Hamilton 3200</div>
+          <div class="d-addr">12A Karaka Street</div>
+          <div class="d-sub">Nawton, Hamilton · Waikato</div>
+        </div>
+        <div class="d-price-col">
+          <div class="d-price-label">Asking Price</div>
+          <div class="d-price-num">$775,000</div>
+          <button class="btn-enq">Enquire with Sopo</button>
+        </div>
+      </div>
+      <div class="dgallery">
+        <div class="gcell main"><div class="gph g1"></div><div class="g-count">1 / 14 Photos</div></div>
+        <div class="gcell"><div class="gph g2"></div></div>
+        <div class="gcell">
+          <div class="gph g3"></div>
+          <div class="g-tour-ov">
+            <div class="g-ring"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/><path d="M2 12h20"/></svg></div>
+            <div class="g-tour-lbl">Enter 360° Tour</div>
+          </div>
+        </div>
+      </div>
+      <div class="dspecs">
+        <div class="dspec"><div class="dspec-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7v13h18V7M3 12h18M9 12v8M15 12v8"/></svg></div><div class="dspec-val">3 <span class="dspec-unit">bed</span></div><div class="dspec-lbl">Bedrooms</div></div>
+        <div class="dspec"><div class="dspec-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h16M4 12V8a4 4 0 018 0v4M4 12v4h16v-4"/></svg></div><div class="dspec-val">1 <span class="dspec-unit">bath</span></div><div class="dspec-lbl">Bathrooms</div></div>
+        <div class="dspec"><div class="dspec-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 3v18"/></svg></div><div class="dspec-val">520 <span class="dspec-unit">m²</span></div><div class="dspec-lbl">Land Area</div></div>
+        <div class="dspec"><div class="dspec-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 21V7l9-4 9 4v14M9 21V12h6v9"/></svg></div><div class="dspec-val">145 <span class="dspec-unit">m²</span></div><div class="dspec-lbl">Floor Area</div></div>
+        <div class="dspec"><div class="dspec-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div><div class="dspec-val">2 <span class="dspec-unit">car</span></div><div class="dspec-lbl">Garaging</div></div>
+        <div class="dspec"><div class="dspec-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="dspec-val">Freehold</div><div class="dspec-lbl">Tenure</div></div>
+      </div>
+      <div class="dbody">
+        <div class="ddesc">
+          <div class="ddesc-hd">About This Property</div>
+          <p>A fresh, modern and much-loved family home in the heart of Nawton. Beautifully presented with light-filled living spaces, a well-appointed kitchen, and seamless flow to a private, low-maintenance outdoor area.</p>
+          <p>Three generous bedrooms, a tidy bathroom, and a double garage make this the ideal family package. Zoned for local schools and within easy reach of Hamilton's amenities.</p>
+          <div class="dfeats">
+            <div class="dfeat"><div class="fdot"></div>Fresh, modern interior</div>
+            <div class="dfeat"><div class="fdot"></div>Double garaging</div>
+            <div class="dfeat"><div class="fdot"></div>Low-maintenance section</div>
+            <div class="dfeat"><div class="fdot"></div>Close to schools and shops</div>
+            <div class="dfeat"><div class="fdot"></div>Open-plan living and dining</div>
+            <div class="dfeat"><div class="fdot"></div>Freehold title</div>
+          </div>
+        </div>
+        <div class="dtour">
+          <div class="dtour-hd">Virtual Walkthrough<div class="tlive"><div style="width:5px;height:5px;border-radius:50%;background:var(--blue);"></div>360° Live</div></div>
+          <div class="tview">
+            <div class="tgrid"></div>
+            <div class="tsphere"><div class="ts-lbl">360°</div></div>
+            <button class="tplay"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--navy)"><path d="M8 5v14l11-7z"/></svg></button>
+            <div class="thint">Drag to look around · Scroll to zoom</div>
+          </div>
+          <div class="trooms">
+            <button class="rmbtn on">Living Room</button>
+            <button class="rmbtn">Kitchen</button>
+            <button class="rmbtn">Bedroom 1</button>
+            <button class="rmbtn">Bathroom</button>
+            <button class="rmbtn">Backyard</button>
+          </div>
+          <div class="tfooter">
+            <div class="tf-hint">Powered by Pannellum 360°</div>
+            <button class="tf-fs"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>Full Screen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 3. SOLD PROPERTIES — dynamic, above the agent section        -->
+<!-- ============================================================ -->
+<div class="sold-wrap">
+  <div class="section">
+    <div class="sec-header">
+      <div>
+        <div class="sec-eyebrow"><div class="sec-line"></div>Recently Sold by Sopo</div>
+        <h2 class="sec-title">Sold <em>Properties</em></h2>
+      </div>
+      <a href="/sold" class="view-all">View All Sales &nbsp;→</a>
+    </div>
+
+    <div class="listings-grid">
+      {featuredSold.length > 0 && (
+        <>
+          <a href={`/homes/${featuredSold[0].slug}`} class="pcard lg">
+            <div class="pimg pb1">
+              {featuredSold[0].gallery?.[0] ? (
+                <img src={featuredSold[0].gallery[0].src} alt={featuredSold[0].gallery[0].alt}
+                  style="width:100%;height:100%;object-fit:cover;display:block;" />
+              ) : (
+                <div class="pimg-inner">
+                  <svg class="c-house" width="380" height="260" viewBox="0 0 380 260">
+                    <rect x="40" y="130" width="300" height="130" fill="white"/>
+                    <polygon points="15,130 190,25 365,130" fill="white"/>
+                    <rect x="250" y="190" width="80" height="70" fill="rgba(0,0,0,0.15)"/>
+                    <rect x="115" y="200" width="60" height="60" fill="rgba(0,0,0,0.2)"/>
+                    <rect x="55" y="165" width="65" height="50" fill="rgba(0,0,0,0.12)"/>
+                    <rect x="190" y="160" width="55" height="45" fill="rgba(0,0,0,0.12)"/>
+                  </svg>
+                </div>
+              )}
+            </div>
+            <div class="poverlay"></div>
+            {featuredSold[0].tourUrl && (
+              <div class="badge360">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/><path d="M2 12h20"/></svg>
+                <span>360° Tour</span>
+              </div>
+            )}
+            <div class="pbody">
+              <div class="pbadge b-sold">Sold</div>
+              <div class="paddress">{featuredSold[0].title}</div>
+              <div class="psuburb">{featuredSold[0].suburb} · {featuredSold[0].city} {featuredSold[0].postcode ?? ""}</div>
+              <div class="pfooter">
+                <div class="pspecs">
+                  <div class="pspec">{featuredSold[0].bedrooms} bed</div>
+                  <div class="pspec">{featuredSold[0].bathrooms} bath</div>
+                  {featuredSold[0].parking && <div class="pspec">{featuredSold[0].parking} parking</div>}
+                </div>
+                <div class="pprice">{featuredSold[0].price}</div>
+              </div>
+            </div>
+          </a>
+
+          <div class="col-right">
+            {featuredSold.slice(1, 3).map((property, index) => (
+              <a href={`/homes/${property.slug}`} class="pcard sm">
+                <div class={`pimg ${index === 0 ? "pb2" : "pb3"}`}>
+                  {property.gallery?.[0] ? (
+                    <img src={property.gallery[0].src} alt={property.gallery[0].alt}
+                      style="width:100%;height:100%;object-fit:cover;display:block;" />
+                  ) : (
+                    <div class="pimg-inner">
+                      <svg class="c-house" width="260" height="178" viewBox="0 0 260 178">
+                        <rect x="20" y="90" width="220" height="88" fill="white"/>
+                        <polygon points="5,90 130,18 255,90" fill="white"/>
+                        <rect x="168" y="132" width="55" height="46" fill="rgba(0,0,0,0.15)"/>
+                        <rect x="88" y="138" width="46" height="40" fill="rgba(0,0,0,0.2)"/>
+                        <rect x="28" y="114" width="44" height="34" fill="rgba(0,0,0,0.12)"/>
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <div class="poverlay"></div>
+                <div class="pbody">
+                  <div class="pbadge b-sold">Sold</div>
+                  <div class="paddress">{property.title}</div>
+                  <div class="psuburb">{property.suburb} · {property.city} {property.postcode ?? ""}</div>
+                  <div class="pfooter">
+                    <div class="pspecs">
+                      <div class="pspec">{property.bedrooms} bed</div>
+                      <div class="pspec">{property.bathrooms} bath</div>
+                      {property.parking && <div class="pspec">{property.parking} parking</div>}
+                    </div>
+                    <div class="pprice">{property.price}</div>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 4. AGENT                                                      -->
+<!-- ============================================================ -->
+<div id="about" class="agent-sec">
+  <div class="agent-inner">
+    <div class="aphoto-outer">
+      <div class="aphoto">
+        <div class="aphoto-ph">
+          <svg class="asilhouette" viewBox="0 0 200 300" fill="white"><ellipse cx="100" cy="90" rx="55" ry="65"/><path d="M20 300 Q100 185 180 300Z"/></svg>
+          <div class="aphoto-lbl">Sopo's Photo<br>Here</div>
+        </div>
+        <div class="aphoto-tag">
+          <div class="ahc-badge"><div><div class="ahc-logo">Harcourts</div><div class="ahc-ln"></div></div><div class="ahc-lbl">Hamilton Rototuna</div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="a-eyebrow"><div class="sec-line"></div>Meet Your Agent</div>
+      <div class="aname">Sopo<br><em>Fuifui</em></div>
+      <div class="acompany">Licensed Sales Consultant · Harcourts Hamilton Rototuna · REAA 2008</div>
+      <p class="abio">I am a mother, a believer, and someone who is passionate about helping others navigate life's big transitions, especially when it comes to real estate. My approach is simple: honesty, integrity, and hard work. I take the time to truly listen and understand each client's unique needs. Real estate is not just about property, it is about people, and I consider it a real privilege that so many clients refer others or return themselves.</p>
+      <div class="aspec-tags">
+        <span class="aspec-tag">First Home Buyers</span>
+        <span class="aspec-tag">Investors</span>
+        <span class="aspec-tag">Upsizing Families</span>
+        <span class="aspec-tag">Downsizing</span>
+        <span class="aspec-tag">Retirement Transitions</span>
+        <span class="aspec-tag">Hamilton</span>
+        <span class="aspec-tag">Ngāruawāhia</span>
+        <span class="aspec-tag">Raglan</span>
+      </div>
+      <div class="astats">
+        <div><div class="asn">10<span>+</span></div><div class="asl">Homes Per Year</div></div>
+        <div><div class="asn">Top<span> 10</span></div><div class="asl">Ranked Twice</div></div>
+        <div><div class="asn">5<span>★</span></div><div class="asl">Average Rating</div></div>
+      </div>
+      <div class="abtns">
+        <a href="mailto:sopo.fuifui@harcourts.co.nz" class="btn-blue">Get in Touch</a>
+        <a href="tel:02102667154" class="btn-outline-n">0210 266 7154</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. CONTACT FORM                                               -->
+<!-- ============================================================ -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <div class="sec-eyebrow"><div class="sec-line"></div>Get in Touch</div>
+        <h2 class="sec-title">Let's Find Your<br><em>Perfect Home</em></h2>
+        <p class="contact-desc">Whether you are buying your first home, selling, or simply exploring your options, Sopo is here to guide you every step of the way. Fill in your details and she will be in touch shortly.</p>
+        <div class="contact-details">
+          <div><div class="cdl">Mobile</div><div class="cdv"><a href="tel:02102667154">0210 266 7154</a></div></div>
+          <div><div class="cdl">Email</div><div class="cdv"><a href="mailto:sopo.fuifui@harcourts.co.nz">sopo.fuifui@harcourts.co.nz</a></div></div>
+          <div><div class="cdl">Office</div><div class="cdv">Harcourts Hamilton Rototuna</div></div>
+          <div><div class="cdl">Serving</div><div class="cdv">Hamilton · Ngāruawāhia · Raglan</div></div>
+        </div>
+      </div>
+      <div class="form-card" id="formCard">
+        <div id="formContent">
+          <div class="form-title">Send an Enquiry</div>
+          <div class="form-subtitle">We will respond within one business day</div>
+          <div class="form-row">
+            <div class="form-group half"><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="Jane"></div>
+            <div class="form-group half"><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="Smith"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group half"><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="jane@example.com"></div>
+            <div class="form-group half"><label class="form-label">Phone Number</label><input class="form-input" type="tel" placeholder="021 000 0000"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">I am looking to</label>
+            <div class="custom-select" data-select="intent">
+              <div class="cs-trigger" id="trigger-intent" onclick="toggleSelect('intent')"><span class="cs-value">Select an option</span><svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+              <div class="cs-dropdown" id="dropdown-intent">
+                <div class="cs-option" onclick="selectOption('intent','Buy a property')"><div class="cs-option-dot"></div>Buy a property</div>
+                <div class="cs-option" onclick="selectOption('intent','Sell a property')"><div class="cs-option-dot"></div>Sell a property</div>
+                <div class="cs-option" onclick="selectOption('intent','Buy and sell')"><div class="cs-option-dot"></div>Buy and sell</div>
+                <div class="cs-option" onclick="selectOption('intent','Investment property')"><div class="cs-option-dot"></div>Investment property</div>
+                <div class="cs-option" onclick="selectOption('intent','Get a property appraisal')"><div class="cs-option-dot"></div>Get a property appraisal</div>
+                <div class="cs-option" onclick="selectOption('intent','General enquiry')"><div class="cs-option-dot"></div>General enquiry</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group half">
+              <label class="form-label">Buyer Type</label>
+              <div class="custom-select" data-select="buyer">
+                <div class="cs-trigger" id="trigger-buyer" onclick="toggleSelect('buyer')"><span class="cs-value">Select type</span><svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="cs-dropdown" id="dropdown-buyer">
+                  <div class="cs-option" onclick="selectOption('buyer','First home buyer')"><div class="cs-option-dot"></div>First home buyer</div>
+                  <div class="cs-option" onclick="selectOption('buyer','Investor')"><div class="cs-option-dot"></div>Investor</div>
+                  <div class="cs-option" onclick="selectOption('buyer','Upsizing family')"><div class="cs-option-dot"></div>Upsizing family</div>
+                  <div class="cs-option" onclick="selectOption('buyer','Downsizing')"><div class="cs-option-dot"></div>Downsizing</div>
+                  <div class="cs-option" onclick="selectOption('buyer','Transitioning to retirement')"><div class="cs-option-dot"></div>Transitioning to retirement</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group half">
+              <label class="form-label">Budget Range</label>
+              <div class="custom-select" data-select="budget">
+                <div class="cs-trigger" id="trigger-budget" onclick="toggleSelect('budget')"><span class="cs-value">Select range</span><svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="cs-dropdown" id="dropdown-budget">
+                  <div class="cs-option" onclick="selectOption('budget','Under $500,000')"><div class="cs-option-dot"></div>Under $500,000</div>
+                  <div class="cs-option" onclick="selectOption('budget','$500k to $700k')"><div class="cs-option-dot"></div>$500k to $700k</div>
+                  <div class="cs-option" onclick="selectOption('budget','$700k to $900k')"><div class="cs-option-dot"></div>$700k to $900k</div>
+                  <div class="cs-option" onclick="selectOption('budget','$900k to $1.2M')"><div class="cs-option-dot"></div>$900k to $1.2M</div>
+                  <div class="cs-option" onclick="selectOption('budget','$1.2M and above')"><div class="cs-option-dot"></div>$1.2M and above</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Preferred Contact Method</label>
+            <div class="custom-select" data-select="contact">
+              <div class="cs-trigger" id="trigger-contact" onclick="toggleSelect('contact')"><span class="cs-value">Select preference</span><svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+              <div class="cs-dropdown" id="dropdown-contact">
+                <div class="cs-option" onclick="selectOption('contact','Phone call')"><div class="cs-option-dot"></div>Phone call</div>
+                <div class="cs-option" onclick="selectOption('contact','Text message')"><div class="cs-option-dot"></div>Text message</div>
+                <div class="cs-option" onclick="selectOption('contact','Email')"><div class="cs-option-dot"></div>Email</div>
+                <div class="cs-option" onclick="selectOption('contact','No preference')"><div class="cs-option-dot"></div>No preference</div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message (Optional)</label>
+            <textarea class="form-textarea" placeholder="Tell Sopo a little about what you are looking for, your timeline, or any questions you have..."></textarea>
+          </div>
+          <button class="form-submit" onclick="submitForm()">
+            Send Enquiry
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <p class="form-privacy">By submitting this form you agree to be contacted by Sopo Fuifui regarding your enquiry. Your information will not be shared with third parties.</p>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon"><svg class="success-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="success-title">Enquiry Sent</div>
+          <div class="success-msg">Thank you for reaching out. Sopo will be in touch with you within one business day.</div>
+          <button class="success-reset" onclick="resetForm()">Send Another Enquiry</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="footer-inner">
+    <div class="ftop">
+      <div>
+        <div class="fln">Sopo <em>Fuifui</em></div>
+        <div class="fls">Licensed Sales Consultant · Harcourts</div>
+        <p class="fbio">Helping families across Hamilton, Ngāruawāhia, and Raglan buy and sell homes with honesty, integrity, and genuine care.</p>
+      </div>
+      <div>
+        <div class="fch">Explore</div>
+        <ul class="flinks">
+          <li><a href="#listings">Current Listings</a></li>
+          <li><a href="/sold">Recently Sold</a></li>
+          <li><a href="#tours">360° Virtual Tours</a></li>
+          <li><a href="#tours">Open Home Schedule</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fch">About</div>
+        <ul class="flinks">
+          <li><a href="#about">About Sopo</a></li>
+          <li><a href="#contact">Client Reviews</a></li>
+          <li><a href="https://harcourts.net/nz/office/hamilton-rototuna/people/sopo-fuifui" target="_blank" rel="noopener">Harcourts Profile</a></li>
+          <li><a href="#contact">Request Appraisal</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fch">Contact</div>
+        <div class="fcontact">
+          <div><div class="fci-lbl">Mobile</div><div class="fci-val"><a href="tel:02102667154">0210 266 7154</a></div></div>
+          <div><div class="fci-lbl">Email</div><div class="fci-val"><a href="mailto:sopo.fuifui@harcourts.co.nz">sopo.fuifui@harcourts.co.nz</a></div></div>
+          <div><div class="fci-lbl">Office</div><div class="fci-val">Harcourts Hamilton Rototuna</div></div>
+          <div><div class="fci-lbl">Areas</div><div class="fci-val">Hamilton · Ngāruawāhia · Raglan</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="fbot-wrap">
+      <div class="fbot-main">
+        <div class="fcopy">© 2026 Sopo Fuifui. Licensed REAA 2008. All rights reserved.</div>
+        <div class="fmp">Proudly designed and powered by <a href="https://www.themarketplace.co.nz/" target="_blank" rel="noopener">The Marketplace New Zealand</a></div>
+        <div class="fhc"><div class="fhc-txt">In association with</div><div><div class="fhc-logo">Harcourts</div><div class="fhc-ln"></div></div></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script is:inline>
+(function () {
+  var hamburger  = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', function () {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mobile-link').forEach(function (link) {
+    link.addEventListener('click', function () {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+  document.querySelectorAll('.rmbtn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.rmbtn').forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+    });
+  });
+  window.toggleSelect = function (id) {
+    var trigger  = document.getElementById('trigger-'  + id);
+    var dropdown = document.getElementById('dropdown-' + id);
+    var isOpen   = dropdown.classList.contains('open');
+    document.querySelectorAll('.cs-dropdown').forEach(function (d) { d.classList.remove('open'); });
+    document.querySelectorAll('.cs-trigger').forEach(function  (t) { t.classList.remove('open'); });
+    if (!isOpen) { dropdown.classList.add('open'); trigger.classList.add('open'); }
+  };
+  window.selectOption = function (id, value) {
+    var trigger  = document.getElementById('trigger-'  + id);
+    var dropdown = document.getElementById('dropdown-' + id);
+    trigger.querySelector('.cs-value').textContent = value;
+    trigger.classList.add('selected');
+    trigger.classList.remove('open');
+    dropdown.classList.remove('open');
+    dropdown.querySelectorAll('.cs-option').forEach(function (o) {
+      o.classList.toggle('picked', o.textContent.trim() === value);
+    });
+  };
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.custom-select')) {
+      document.querySelectorAll('.cs-dropdown').forEach(function (d) { d.classList.remove('open'); });
+      document.querySelectorAll('.cs-trigger').forEach(function  (t) { t.classList.remove('open'); });
+    }
+  });
+  window.submitForm = function () {
+    var formContent = document.getElementById('formContent');
+    var formSuccess = document.getElementById('formSuccess');
+    formContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    formContent.style.opacity    = '0';
+    formContent.style.transform  = 'translateY(-12px)';
+    setTimeout(function () { formContent.style.display = 'none'; formSuccess.classList.add('show'); }, 300);
+  };
+  window.resetForm = function () {
+    var formContent = document.getElementById('formContent');
+    var formSuccess = document.getElementById('formSuccess');
+    formSuccess.classList.remove('show');
+    formContent.style.display   = '';
+    formContent.style.opacity   = '0';
+    formContent.style.transform = 'translateY(12px)';
+    formContent.querySelectorAll('input, textarea').forEach(function (el) { el.value = ''; });
+    formContent.querySelectorAll('.cs-value').forEach(function (el) {
+      var id = el.closest('.custom-select').dataset.select;
+      var defaults = { intent:'Select an option', buyer:'Select type', budget:'Select range', contact:'Select preference' };
+      el.textContent = defaults[id] || 'Select an option';
+    });
+    formContent.querySelectorAll('.cs-trigger').forEach(function (t) { t.classList.remove('selected','open'); });
+    formContent.querySelectorAll('.cs-dropdown').forEach(function (d) { d.classList.remove('open'); });
+    formContent.querySelectorAll('.cs-option').forEach(function  (o) { o.classList.remove('picked'); });
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        formContent.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+        formContent.style.opacity    = '1';
+        formContent.style.transform  = 'translateY(0)';
+      });
+    });
+  };
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY;
+    var s = document.querySelector('.hero-split');
+    if (s && y < 800) { s.style.transform = 'translateY(' + (y * 0.12) + 'px)'; }
+  });
+})();
+</script>
