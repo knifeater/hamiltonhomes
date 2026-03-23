@@ -48,13 +48,15 @@ function otherStatusClass(s) {
 
     /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:300;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 56px;background:var(--navy);border-bottom:2px solid var(--blue);}
-    .nav-left{display:flex;align-items:center;gap:20px;}
+    .nav-left{display:flex;align-items:center;gap:20px;text-decoration:none;}
     .hc-mark{display:flex;flex-direction:column;gap:3px;}
     .hc-word{font-size:20px;font-weight:700;color:#fff;letter-spacing:-.01em;line-height:1;}
     .hc-bar{width:26px;height:3px;background:var(--blue);border-radius:1px;}
     .nav-sep{width:1px;height:32px;background:rgba(255,255,255,.15);}
     .nav-agent-name{font-size:14px;font-weight:600;color:#fff;}
     .nav-agent-role{font-size:10px;font-weight:300;color:var(--blue);letter-spacing:.18em;text-transform:uppercase;}
+    .nav-left:hover .hc-word,.nav-left:hover .nav-agent-name{color:rgba(255,255,255,.85);}
+    .nav-left:hover .nav-agent-role{color:#33BFFF;}
     .nav-links{display:flex;align-items:center;gap:36px;list-style:none;}
     .nav-links a{font-size:12px;font-weight:400;color:rgba(255,255,255,.65);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .25s;}
     .nav-links a:hover{color:var(--blue);}
@@ -82,8 +84,11 @@ function otherStatusClass(s) {
     .mobile-contact-link{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);font-size:12px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:13px 16px;border-radius:3px;transition:border-color .2s,color .2s;}
     .mobile-contact-link:hover{border-color:var(--blue);color:var(--blue);}
 
+    /* ADDR STRIP (now above hero) */
+    .addr-strip{margin-top:76px;}
+
     /* HERO */
-    .listing-hero{margin-top:76px;width:100%;background:#0D1830;display:grid;grid-template-columns:1.65fr 1fr;grid-template-rows:310px 220px;gap:3px;}
+    .listing-hero{width:100%;background:#0D1830;display:grid;grid-template-columns:1.65fr 1fr;grid-template-rows:310px 220px;gap:3px;}
     .gc{position:relative;overflow:hidden;cursor:pointer;background:#1E2D56;}
     .gc.main{grid-row:1/3;}
     .gc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s ease;}
@@ -102,7 +107,7 @@ function otherStatusClass(s) {
     .hs-under-offer{background:#D97706;color:#fff;}
 
     /* ADDRESS */
-    .addr-strip{width:100%;background:#fff;border-bottom:1px solid var(--bdr);}
+    .addr-strip{width:100%;background:#fff;border-bottom:1px solid var(--bdr);border-top:none;}
     .addr-inner{max-width:1320px;margin:0 auto;padding:26px 48px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;}
     .addr-bc{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:11px;color:var(--muted);letter-spacing:.04em;margin-bottom:10px;}
     .addr-bc a{color:var(--muted);text-decoration:none;transition:color .2s;}
@@ -211,7 +216,7 @@ function otherStatusClass(s) {
     .agent-card{background:#fff;border:1px solid var(--bdr);border-radius:5px;overflow:hidden;}
     .agt{background:var(--navy);padding:18px 20px;display:flex;align-items:center;gap:14px;border-bottom:2px solid var(--blue);}
     .ava{width:50px;height:50px;border-radius:50%;background:linear-gradient(160deg,#253570,#162040);border:2px solid rgba(0,174,239,.4);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-    .ava img{width:100%;height:100%;object-fit:cover;}
+    .ava img{width:100%;height:100%;object-fit:cover;object-position:center 20%;}
     .ava svg{opacity:.22;}
     .agt-nm{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:#fff;line-height:1.15;}
     .agt-rl{font-size:10px;font-weight:300;color:rgba(255,255,255,.42);letter-spacing:.07em;margin-top:3px;}
@@ -307,8 +312,7 @@ function otherStatusClass(s) {
       .listings-grid{grid-template-columns:repeat(2,1fr);}
       .ftop{grid-template-columns:1fr 1fr;gap:36px;}
       .fbot-main{flex-direction:column;align-items:flex-start;gap:10px;padding:20px 0 24px;}
-    }
-    @media(max-width:680px){
+    }    @media(max-width:680px){
       nav{padding:0 20px;}
       .listing-hero{grid-template-columns:1fr;grid-template-rows:260px;}
       .gc:not(.main){display:none;}.gc.main{grid-row:auto;}
@@ -338,13 +342,15 @@ function otherStatusClass(s) {
 
 <!-- NAV -->
 <nav>
-  <div class="nav-left">
+  <!-- CHANGE 1: .nav-left is now an <a> tag linking to the homepage -->
+  <a href="https://hamiltonhomes.netlify.app/" class="nav-left">
     <div class="hc-mark"><div class="hc-word">Harcourts</div><div class="hc-bar"></div></div>
     <div class="nav-sep"></div>
     <div><div class="nav-agent-name">Sopo Fuifui</div><div class="nav-agent-role">Licensed Sales Consultant</div></div>
-  </div>
+  </a>
   <ul class="nav-links">
-    <li><a href="/#listings">Listings</a></li>
+    <!-- CHANGE 2: Listings links to the full listings URL -->
+    <li><a href="https://hamiltonhomes.netlify.app/listings/">Listings</a></li>
     <li><a href="/#tours">360° Tours</a></li>
     <li><a href="/#about">About</a></li>
     <li><a href="/#contact">Contact</a></li>
@@ -354,7 +360,7 @@ function otherStatusClass(s) {
 </nav>
 <div class="mobile-menu" id="mobileMenu">
   <ul>
-    <li><a href="/#listings" class="ml">Listings</a></li>
+    <li><a href="https://hamiltonhomes.netlify.app/listings/" class="ml">Listings</a></li>
     <li><a href="/#tours"    class="ml">360° Tours</a></li>
     <li><a href="/#about"    class="ml">About</a></li>
     <li><a href="/#contact"  class="ml">Contact</a></li>
@@ -367,6 +373,27 @@ function otherStatusClass(s) {
     <a href="mailto:sopo.fuifui@harcourts.co.nz" class="mobile-contact-link ml">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email
     </a>
+  </div>
+</div>
+
+<!-- ADDRESS (above hero images) -->
+<div class="addr-strip">
+  <div class="addr-inner">
+    <div>
+      <div class="addr-bc">
+        <a href="/">Home</a><span>›</span><a href="https://hamiltonhomes.netlify.app/listings/">Listings</a><span>›</span>
+        <a href="https://hamiltonhomes.netlify.app/listings/">{p.suburb}</a><span>›</span>{p.title}
+      </div>
+      <h1 class="addr-title">{p.title}</h1>
+      <div class="addr-suburb">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        {p.suburb}, {p.city} {p.postcode ?? ""}
+      </div>
+    </div>
+    <div class="addr-price">
+      <div class="price-lbl">{priceLabel}</div>
+      <div class="price-val">{p.price}</div>
+    </div>
   </div>
 </div>
 
@@ -393,27 +420,6 @@ function otherStatusClass(s) {
   </div>
   <div class="gc">{hasGallery && p.gallery[1] ? <img src={p.gallery[1].src} alt={p.gallery[1].alt}/> : <div class="gc-ph ph2"></div>}</div>
   <div class="gc">{hasGallery && p.gallery[2] ? <img src={p.gallery[2].src} alt={p.gallery[2].alt}/> : <div class="gc-ph ph3"></div>}</div>
-</div>
-
-<!-- ADDRESS -->
-<div class="addr-strip">
-  <div class="addr-inner">
-    <div>
-      <div class="addr-bc">
-        <a href="/">Home</a><span>›</span><a href="/#listings">Listings</a><span>›</span>
-        <a href="/#listings">{p.suburb}</a><span>›</span>{p.title}
-      </div>
-      <h1 class="addr-title">{p.title}</h1>
-      <div class="addr-suburb">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        {p.suburb}, {p.city} {p.postcode ?? ""}
-      </div>
-    </div>
-    <div class="addr-price">
-      <div class="price-lbl">{priceLabel}</div>
-      <div class="price-val">{p.price}</div>
-    </div>
-  </div>
 </div>
 
 <!-- SPECS BAR -->
@@ -528,17 +534,20 @@ function otherStatusClass(s) {
           )}
         </div>
         <div id="enqForm">
-          <div class="enq-form">
+          <form class="enq-form" name="property-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitEnq(event)">
+            <input type="hidden" name="form-name" value="property-enquiry" />
+            <input type="hidden" name="property" value={p.title} />
+            <p style="display:none;"><label>Don't fill this out: <input name="bot-field" /></label></p>
             <div style="font-size:13px;font-weight:600;color:var(--navy);">Send an Enquiry</div>
             <div style="font-size:12px;color:var(--muted);margin-top:-4px;">Sopo will respond within one business day.</div>
             <div class="f2">
-              <div class="fg"><label class="fl">First Name</label><input class="fi-inp" type="text" placeholder="Jane" /></div>
-              <div class="fg"><label class="fl">Last Name</label><input class="fi-inp" type="text" placeholder="Smith" /></div>
+              <div class="fg"><label class="fl" for="enq-fname">First Name</label><input id="enq-fname" class="fi-inp" type="text" name="first-name" placeholder="Jane" required /></div>
+              <div class="fg"><label class="fl" for="enq-lname">Last Name</label><input id="enq-lname" class="fi-inp" type="text" name="last-name" placeholder="Smith" required /></div>
             </div>
-            <div class="fg"><label class="fl">Email</label><input class="fi-inp" type="email" placeholder="jane@example.com" /></div>
-            <div class="fg"><label class="fl">Phone</label><input class="fi-inp" type="tel" placeholder="021 000 0000" /></div>
-            <div class="fg"><label class="fl">Message</label><textarea class="fi-ta" placeholder="Tell Sopo what you're looking for…"></textarea></div>
-            <button class="enq-submit" onclick="submitEnq()">
+            <div class="fg"><label class="fl" for="enq-email">Email</label><input id="enq-email" class="fi-inp" type="email" name="email" placeholder="jane@example.com" required /></div>
+            <div class="fg"><label class="fl" for="enq-phone">Phone</label><input id="enq-phone" class="fi-inp" type="tel" name="phone" placeholder="021 000 0000" /></div>
+            <div class="fg"><label class="fl" for="enq-msg">Message</label><textarea id="enq-msg" class="fi-ta" name="message" placeholder="Tell Sopo what you're looking for…"></textarea></div>
+            <button type="submit" class="enq-submit" id="enqSubmitBtn">
               Send Enquiry
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
@@ -548,7 +557,7 @@ function otherStatusClass(s) {
               Call Sopo — 0210 266 7154
             </a>
             <p class="enq-priv">By submitting you agree to be contacted by Sopo Fuifui regarding your enquiry. Your details will not be shared with third parties.</p>
-          </div>
+          </form>
         </div>
         <div class="enq-suc" id="enqSuc">
           <div class="suc-ring"><svg class="suc-chk" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -561,8 +570,7 @@ function otherStatusClass(s) {
       <div class="agent-card">
         <div class="agt">
           <div class="ava">
-            <!-- Swap SVG with: <img src="/images/sopo.jpg" alt="Sopo Fuifui"> -->
-            <svg width="28" height="44" viewBox="0 0 200 300" fill="white"><ellipse cx="100" cy="90" rx="55" ry="65"/><path d="M20 300 Q100 185 180 300Z"/></svg>
+            <img src="/images/sopo_portrait.png" alt="Sopo Fuifui" />
           </div>
           <div><div class="agt-nm">Sopo Fuifui</div><div class="agt-rl">Licensed Sales Consultant<br />Harcourts Hamilton Rototuna</div></div>
         </div>
@@ -595,7 +603,7 @@ function otherStatusClass(s) {
         <div class="other-eyebrow">Sopo Fuifui · Harcourts Hamilton Rototuna</div>
         <div class="other-title">More <em>Listings</em></div>
       </div>
-      <a href="/#listings" class="other-viewall">View All Listings &nbsp;→</a>
+      <a href="https://hamiltonhomes.netlify.app/listings/" class="other-viewall">View All Listings &nbsp;→</a>
     </div>
     <div class="listings-grid">
 
@@ -668,7 +676,7 @@ function otherStatusClass(s) {
       </div>
       <div>
         <div class="fch">Explore</div>
-        <ul class="flinks"><li><a href="/#listings">Current Listings</a></li><li><a href="/#listings">Recently Sold</a></li><li><a href="/#tours">360° Virtual Tours</a></li><li><a href="/#tours">Open Home Schedule</a></li></ul>
+        <ul class="flinks"><li><a href="https://hamiltonhomes.netlify.app/listings/">Current Listings</a></li><li><a href="/#listings">Recently Sold</a></li><li><a href="/#tours">360° Virtual Tours</a></li><li><a href="/#tours">Open Home Schedule</a></li></ul>
       </div>
       <div>
         <div class="fch">About</div>
@@ -699,15 +707,40 @@ function otherStatusClass(s) {
   var h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');
   h.addEventListener('click',function(){h.classList.toggle('open');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';});
   document.querySelectorAll('.ml').forEach(function(l){l.addEventListener('click',function(){h.classList.remove('open');m.classList.remove('open');document.body.style.overflow='';});});
-  window.submitEnq=function(){
-    var f=document.getElementById('enqForm'),s=document.getElementById('enqSuc');
-    f.style.transition='opacity .25s,transform .25s';f.style.opacity='0';f.style.transform='translateY(-8px)';
-    setTimeout(function(){f.style.display='none';s.classList.add('show');},260);
+
+  window.submitEnq=function(e){
+    e.preventDefault();
+    var form=e.target;
+    var btn=document.getElementById('enqSubmitBtn');
+    btn.disabled=true;
+    btn.textContent='Sending…';
+
+    var data=new FormData(form);
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:new URLSearchParams(data).toString()
+    })
+    .then(function(res){
+      if(res.ok){
+        var f=document.getElementById('enqForm'),s=document.getElementById('enqSuc');
+        f.style.transition='opacity .25s,transform .25s';f.style.opacity='0';f.style.transform='translateY(-8px)';
+        setTimeout(function(){f.style.display='none';s.classList.add('show');},260);
+      } else {
+        btn.disabled=false;btn.innerHTML='Send Enquiry <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+        alert('Something went wrong. Please try again or call Sopo directly.');
+      }
+    })
+    .catch(function(){
+      btn.disabled=false;btn.innerHTML='Send Enquiry <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+      alert('Something went wrong. Please try again or call Sopo directly.');
+    });
   };
+
   window.resetEnq=function(){
     var f=document.getElementById('enqForm'),s=document.getElementById('enqSuc');
+    var btn=document.getElementById('enqSubmitBtn');
     s.classList.remove('show');f.style.display='';f.style.opacity='0';f.style.transform='translateY(8px)';
-    f.querySelectorAll('input,textarea').forEach(function(el){el.value='';});
+    f.querySelectorAll('input,textarea').forEach(function(el){if(el.type!=='hidden'){el.value='';}});
+    btn.disabled=false;btn.innerHTML='Send Enquiry <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
     requestAnimationFrame(function(){requestAnimationFrame(function(){f.style.transition='opacity .3s,transform .3s';f.style.opacity='1';f.style.transform='translateY(0)';});});
   };
 })();
