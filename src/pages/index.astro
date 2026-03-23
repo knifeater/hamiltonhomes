@@ -84,7 +84,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:76px;display:flex;ali
 .hero-grid{position:absolute;top:0;right:0;width:52%;height:100%;clip-path:polygon(12% 0,100% 0,100% 100%,0% 100%);opacity:0.06;background-image:repeating-linear-gradient(0deg,var(--blue) 0,var(--blue) 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,var(--blue) 0,var(--blue) 1px,transparent 1px,transparent 60px);}
 .hero-glow{position:absolute;top:15%;right:10%;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(0,174,239,0.2) 0%,transparent 70%);pointer-events:none;}
 .hero-accent{position:absolute;top:0;left:48%;width:2px;height:100%;background:linear-gradient(to bottom,transparent,var(--blue),transparent);opacity:0.3;}
-.hero-illo{position:absolute;right:3%;bottom:0;width:44%;max-width:620px;opacity:0.15;}
+.hero-illo{position:absolute;top:0;right:0;width:52%;height:100%;opacity:0.7;object-fit:cover;object-position:center center;clip-path:polygon(12% 0,100% 0,100% 100%,0% 100%);}
 .hero-content{position:relative;z-index:2;padding:76px 80px 0;max-width:1400px;width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:60px;}
 .hero-tag{display:inline-flex;align-items:center;gap:10px;background:rgba(0,174,239,0.1);border:1px solid var(--border-b);border-radius:2px;padding:7px 16px;margin-bottom:28px;animation:fadeUp 0.7s 0.1s both;}
 .hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);}
@@ -205,8 +205,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:76px;display:flex;ali
 .d-price-col{text-align:right;}
 .d-price-label{font-size:10px;font-weight:400;color:rgba(255,255,255,0.28);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px;}
 .d-price-num{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:400;color:var(--blue);line-height:1;margin-bottom:14px;}
-.btn-enq{background:var(--blue);color:var(--navy);border:none;padding:13px 26px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;width:100%;transition:background 0.25s;}
+.btn-enq{background:var(--blue);color:var(--navy);border:none;padding:13px 26px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;width:100%;transition:background 0.25s;text-decoration:none;display:block;text-align:center;}
 .btn-enq:hover{background:#33BFFF;}
+.btn-enq-sm{background:transparent;color:var(--blue);border:1px solid var(--border-b);padding:6px 16px;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:background 0.2s,border-color 0.2s;white-space:nowrap;}
+.btn-enq-sm:hover{background:rgba(0,174,239,0.1);}
+.btn-view-listing{display:block;margin-top:10px;text-align:center;padding:11px 26px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);border:1px solid var(--border-b);border-radius:3px;text-decoration:none;transition:background 0.25s,color 0.25s;}
+.btn-view-listing:hover{background:rgba(0,174,239,0.1);}
 .dgallery{display:grid;grid-template-columns:1.8fr 1fr;grid-template-rows:280px 190px;gap:6px;padding:6px;}
 .gcell{border-radius:4px;overflow:hidden;position:relative;}
 .gcell.main{grid-row:1/3;}
@@ -437,14 +441,14 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
 
 <!-- ===================== NAV ===================== -->
 <nav>
-  <div class="nav-left">
+  <a href="https://hamiltonhomes.netlify.app/" class="nav-left" style="text-decoration:none;">
     <div class="hc-mark"><div class="hc-word">Harcourts</div><div class="hc-bar"></div></div>
     <div class="nav-sep"></div>
     <div>
       <div class="nav-agent-name">Sopo Fuifui</div>
       <div class="nav-agent-role">Licensed Sales Consultant</div>
     </div>
-  </div>
+  </a>
   <ul class="nav-links">
     <li><a href="#listings">Listings</a></li>
     <li><a href="#tours">360° Tours</a></li>
@@ -478,16 +482,8 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
   <div class="hero-split"></div>
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
-  <div class="hero-accent"></div>
-  <svg class="hero-illo" viewBox="0 0 700 500" fill="none">
-    <rect x="100" y="250" width="500" height="250" fill="white"/>
-    <polygon points="60,250 350,60 640,250" fill="white"/>
-    <rect x="420" y="340" width="160" height="160" fill="rgba(0,0,0,0.15)"/>
-    <rect x="200" y="360" width="90" height="140" fill="rgba(0,0,0,0.2)"/>
-    <rect x="130" y="300" width="100" height="75" fill="rgba(0,0,0,0.12)"/>
-    <rect x="315" y="295" width="88" height="68" fill="rgba(0,0,0,0.12)"/>
-    <rect x="490" y="270" width="40" height="88" fill="white"/>
-  </svg>
+
+  <img class="hero-illo" src="/images/sopo_herosection.png" alt="Sopo Fuifui" />
   <div class="hero-content">
     <div>
       <div class="hero-tag"><div class="hero-tag-dot"></div><div class="hero-tag-txt">Hamilton · Ngāruawāhia · Raglan</div></div>
@@ -652,24 +648,25 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
 <div id="tours" class="detail-wrap">
   <div class="detail-inner">
     <div class="detail-intro">
-      <div class="sec-eyebrow" style="justify-content:center;"><div class="sec-line"></div>When a buyer clicks a property<div class="sec-line"></div></div>
-      <h2 class="sec-title" style="color:var(--white);margin-top:12px;">Property <em>Detail</em> Page</h2>
+      <div class="sec-eyebrow" style="justify-content:center;"><div class="sec-line"></div>Spotlight<div class="sec-line"></div></div>
+      <h2 class="sec-title" style="color:var(--white);margin-top:12px;">Featured <em>Home</em></h2>
     </div>
     <div class="dcard">
       <div class="dtopbar">
         <div class="dcrumb"><span>Listings</span><span class="dcrumb-sep">›</span><span>Nawton</span><span class="dcrumb-sep">›</span><span class="dcrumb-cur">12A Karaka Street</span></div>
-        <div class="dstatus"><div class="dstatus-dot"></div><div class="dstatus-txt">Active Listing</div></div>
+        <div style="display:flex;align-items:center;gap:16px;">
+          <div class="dstatus"><div class="dstatus-dot"></div><div class="dstatus-txt">Active Listing</div></div>
+          <button class="btn-enq-sm" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Enquire with Sopo</button>
+        </div>
       </div>
       <div class="dheader">
-        <div>
-          <div class="d-eyebrow">Nawton · Hamilton 3200</div>
-          <div class="d-addr">12A Karaka Street</div>
-          <div class="d-sub">Nawton, Hamilton · Waikato</div>
-        </div>
-        <div class="d-price-col">
-          <div class="d-price-label">Asking Price</div>
-          <div class="d-price-num">$775,000</div>
-          <button class="btn-enq">Enquire with Sopo</button>
+        <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:32px;">
+          <div>
+            <div class="d-eyebrow">Nawton · Hamilton 3200</div>
+            <div class="d-addr">12A Karaka Street</div>
+            <div class="d-sub">Nawton, Hamilton · Waikato</div>
+          </div>
+          <a href="/homes/12a-karaka-street" class="btn-enq" style="width:auto;white-space:nowrap;flex-shrink:0;">View Full Listing →</a>
         </div>
       </div>
       <div class="dgallery">
@@ -709,7 +706,6 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
           <div class="dtour-hd">Virtual Walkthrough<div class="tlive"><div style="width:5px;height:5px;border-radius:50%;background:var(--blue);"></div>360° Live</div></div>
           <div class="tview">
             <div class="tgrid"></div>
-            <div class="tsphere"><div class="ts-lbl">360°</div></div>
             <button class="tplay"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--navy)"><path d="M8 5v14l11-7z"/></svg></button>
             <div class="thint">Drag to look around · Scroll to zoom</div>
           </div>
@@ -835,10 +831,7 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
   <div class="agent-inner">
     <div class="aphoto-outer">
       <div class="aphoto">
-        <div class="aphoto-ph">
-          <svg class="asilhouette" viewBox="0 0 200 300" fill="white"><ellipse cx="100" cy="90" rx="55" ry="65"/><path d="M20 300 Q100 185 180 300Z"/></svg>
-          <div class="aphoto-lbl">Sopo's Photo<br>Here</div>
-        </div>
+        <img src="/images/sopo_portrait.png" alt="Sopo Fuifui" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;border-radius:5px;filter:brightness(0.82);" />
         <div class="aphoto-tag">
           <div class="ahc-badge"><div><div class="ahc-logo">Harcourts</div><div class="ahc-ln"></div></div><div class="ahc-lbl">Hamilton Rototuna</div></div>
         </div>
@@ -893,77 +886,86 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
         <div id="formContent">
           <div class="form-title">Send an Enquiry</div>
           <div class="form-subtitle">We will respond within one business day</div>
-          <div class="form-row">
-            <div class="form-group half"><label class="form-label">First Name</label><input class="form-input" type="text" placeholder="Jane"></div>
-            <div class="form-group half"><label class="form-label">Last Name</label><input class="form-input" type="text" placeholder="Smith"></div>
-          </div>
-          <div class="form-row">
-            <div class="form-group half"><label class="form-label">Email Address</label><input class="form-input" type="email" placeholder="jane@example.com"></div>
-            <div class="form-group half"><label class="form-label">Phone Number</label><input class="form-input" type="tel" placeholder="021 000 0000"></div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">I am looking to</label>
-            <div class="custom-select" data-select="intent">
-              <div class="cs-trigger" id="trigger-intent" onclick="toggleSelect('intent')"><span class="cs-value">Select an option</span><svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-              <div class="cs-dropdown" id="dropdown-intent">
-                <div class="cs-option" onclick="selectOption('intent','Buy a property')"><div class="cs-option-dot"></div>Buy a property</div>
-                <div class="cs-option" onclick="selectOption('intent','Sell a property')"><div class="cs-option-dot"></div>Sell a property</div>
-                <div class="cs-option" onclick="selectOption('intent','Buy and sell')"><div class="cs-option-dot"></div>Buy and sell</div>
-                <div class="cs-option" onclick="selectOption('intent','Investment property')"><div class="cs-option-dot"></div>Investment property</div>
-                <div class="cs-option" onclick="selectOption('intent','Get a property appraisal')"><div class="cs-option-dot"></div>Get a property appraisal</div>
-                <div class="cs-option" onclick="selectOption('intent','General enquiry')"><div class="cs-option-dot"></div>General enquiry</div>
-              </div>
+          <form id="enquiryForm" name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitForm(event)">
+            <input type="hidden" name="form-name" value="enquiry" />
+            <input type="hidden" name="bot-field" style="display:none;" />
+            <!-- hidden inputs to capture custom select values -->
+            <input type="hidden" name="intent" id="input-intent" />
+            <input type="hidden" name="buyer-type" id="input-buyer" />
+            <input type="hidden" name="budget" id="input-budget" />
+            <input type="hidden" name="contact-method" id="input-contact" />
+            <div class="form-row">
+              <div class="form-group half"><label class="form-label">First Name</label><input class="form-input" type="text" name="first-name" placeholder="Jane" required /></div>
+              <div class="form-group half"><label class="form-label">Last Name</label><input class="form-input" type="text" name="last-name" placeholder="Smith" required /></div>
             </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group half">
-              <label class="form-label">Buyer Type</label>
-              <div class="custom-select" data-select="buyer">
-                <div class="cs-trigger" id="trigger-buyer" onclick="toggleSelect('buyer')"><span class="cs-value">Select type</span><svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-                <div class="cs-dropdown" id="dropdown-buyer">
-                  <div class="cs-option" onclick="selectOption('buyer','First home buyer')"><div class="cs-option-dot"></div>First home buyer</div>
-                  <div class="cs-option" onclick="selectOption('buyer','Investor')"><div class="cs-option-dot"></div>Investor</div>
-                  <div class="cs-option" onclick="selectOption('buyer','Upsizing family')"><div class="cs-option-dot"></div>Upsizing family</div>
-                  <div class="cs-option" onclick="selectOption('buyer','Downsizing')"><div class="cs-option-dot"></div>Downsizing</div>
-                  <div class="cs-option" onclick="selectOption('buyer','Transitioning to retirement')"><div class="cs-option-dot"></div>Transitioning to retirement</div>
+            <div class="form-row">
+              <div class="form-group half"><label class="form-label">Email Address</label><input class="form-input" type="email" name="email" placeholder="jane@example.com" required /></div>
+              <div class="form-group half"><label class="form-label">Phone Number</label><input class="form-input" type="tel" name="phone" placeholder="021 000 0000" /></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">I am looking to</label>
+              <div class="custom-select" data-select="intent">
+                <div class="cs-trigger" id="trigger-intent" onclick="toggleSelect('intent')"><span class="cs-value">Select an option</span><svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="cs-dropdown" id="dropdown-intent">
+                  <div class="cs-option" onclick="selectOption('intent','Buy a property')"><div class="cs-option-dot"></div>Buy a property</div>
+                  <div class="cs-option" onclick="selectOption('intent','Sell a property')"><div class="cs-option-dot"></div>Sell a property</div>
+                  <div class="cs-option" onclick="selectOption('intent','Buy and sell')"><div class="cs-option-dot"></div>Buy and sell</div>
+                  <div class="cs-option" onclick="selectOption('intent','Investment property')"><div class="cs-option-dot"></div>Investment property</div>
+                  <div class="cs-option" onclick="selectOption('intent','Get a property appraisal')"><div class="cs-option-dot"></div>Get a property appraisal</div>
+                  <div class="cs-option" onclick="selectOption('intent','General enquiry')"><div class="cs-option-dot"></div>General enquiry</div>
                 </div>
               </div>
             </div>
-            <div class="form-group half">
-              <label class="form-label">Budget Range</label>
-              <div class="custom-select" data-select="budget">
-                <div class="cs-trigger" id="trigger-budget" onclick="toggleSelect('budget')"><span class="cs-value">Select range</span><svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-                <div class="cs-dropdown" id="dropdown-budget">
-                  <div class="cs-option" onclick="selectOption('budget','Under $500,000')"><div class="cs-option-dot"></div>Under $500,000</div>
-                  <div class="cs-option" onclick="selectOption('budget','$500k to $700k')"><div class="cs-option-dot"></div>$500k to $700k</div>
-                  <div class="cs-option" onclick="selectOption('budget','$700k to $900k')"><div class="cs-option-dot"></div>$700k to $900k</div>
-                  <div class="cs-option" onclick="selectOption('budget','$900k to $1.2M')"><div class="cs-option-dot"></div>$900k to $1.2M</div>
-                  <div class="cs-option" onclick="selectOption('budget','$1.2M and above')"><div class="cs-option-dot"></div>$1.2M and above</div>
+            <div class="form-row">
+              <div class="form-group half">
+                <label class="form-label">Buyer Type</label>
+                <div class="custom-select" data-select="buyer">
+                  <div class="cs-trigger" id="trigger-buyer" onclick="toggleSelect('buyer')"><span class="cs-value">Select type</span><svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+                  <div class="cs-dropdown" id="dropdown-buyer">
+                    <div class="cs-option" onclick="selectOption('buyer','First home buyer')"><div class="cs-option-dot"></div>First home buyer</div>
+                    <div class="cs-option" onclick="selectOption('buyer','Investor')"><div class="cs-option-dot"></div>Investor</div>
+                    <div class="cs-option" onclick="selectOption('buyer','Upsizing family')"><div class="cs-option-dot"></div>Upsizing family</div>
+                    <div class="cs-option" onclick="selectOption('buyer','Downsizing')"><div class="cs-option-dot"></div>Downsizing</div>
+                    <div class="cs-option" onclick="selectOption('buyer','Transitioning to retirement')"><div class="cs-option-dot"></div>Transitioning to retirement</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group half">
+                <label class="form-label">Budget Range</label>
+                <div class="custom-select" data-select="budget">
+                  <div class="cs-trigger" id="trigger-budget" onclick="toggleSelect('budget')"><span class="cs-value">Select range</span><svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+                  <div class="cs-dropdown" id="dropdown-budget">
+                    <div class="cs-option" onclick="selectOption('budget','Under $500,000')"><div class="cs-option-dot"></div>Under $500,000</div>
+                    <div class="cs-option" onclick="selectOption('budget','$500k to $700k')"><div class="cs-option-dot"></div>$500k to $700k</div>
+                    <div class="cs-option" onclick="selectOption('budget','$700k to $900k')"><div class="cs-option-dot"></div>$700k to $900k</div>
+                    <div class="cs-option" onclick="selectOption('budget','$900k to $1.2M')"><div class="cs-option-dot"></div>$900k to $1.2M</div>
+                    <div class="cs-option" onclick="selectOption('budget','$1.2M and above')"><div class="cs-option-dot"></div>$1.2M and above</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Preferred Contact Method</label>
-            <div class="custom-select" data-select="contact">
-              <div class="cs-trigger" id="trigger-contact" onclick="toggleSelect('contact')"><span class="cs-value">Select preference</span><svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
-              <div class="cs-dropdown" id="dropdown-contact">
-                <div class="cs-option" onclick="selectOption('contact','Phone call')"><div class="cs-option-dot"></div>Phone call</div>
-                <div class="cs-option" onclick="selectOption('contact','Text message')"><div class="cs-option-dot"></div>Text message</div>
-                <div class="cs-option" onclick="selectOption('contact','Email')"><div class="cs-option-dot"></div>Email</div>
-                <div class="cs-option" onclick="selectOption('contact','No preference')"><div class="cs-option-dot"></div>No preference</div>
+            <div class="form-group">
+              <label class="form-label">Preferred Contact Method</label>
+              <div class="custom-select" data-select="contact">
+                <div class="cs-trigger" id="trigger-contact" onclick="toggleSelect('contact')"><span class="cs-value">Select preference</span><svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+                <div class="cs-dropdown" id="dropdown-contact">
+                  <div class="cs-option" onclick="selectOption('contact','Phone call')"><div class="cs-option-dot"></div>Phone call</div>
+                  <div class="cs-option" onclick="selectOption('contact','Text message')"><div class="cs-option-dot"></div>Text message</div>
+                  <div class="cs-option" onclick="selectOption('contact','Email')"><div class="cs-option-dot"></div>Email</div>
+                  <div class="cs-option" onclick="selectOption('contact','No preference')"><div class="cs-option-dot"></div>No preference</div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Message (Optional)</label>
-            <textarea class="form-textarea" placeholder="Tell Sopo a little about what you are looking for, your timeline, or any questions you have..."></textarea>
-          </div>
-          <button class="form-submit" onclick="submitForm()">
-            Send Enquiry
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-          <p class="form-privacy">By submitting this form you agree to be contacted by Sopo Fuifui regarding your enquiry. Your information will not be shared with third parties.</p>
+            <div class="form-group">
+              <label class="form-label">Message (Optional)</label>
+              <textarea class="form-textarea" name="message" placeholder="Tell Sopo a little about what you are looking for, your timeline, or any questions you have..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">
+              Send Enquiry
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+            <p class="form-privacy">By submitting this form you agree to be contacted by Sopo Fuifui regarding your enquiry. Your information will not be shared with third parties.</p>
+          </form>
         </div>
         <div class="form-success" id="formSuccess">
           <div class="success-icon"><svg class="success-check" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -1063,6 +1065,9 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
     dropdown.querySelectorAll('.cs-option').forEach(function (o) {
       o.classList.toggle('picked', o.textContent.trim() === value);
     });
+    // sync value into hidden input so Netlify receives it
+    var hidden = document.getElementById('input-' + id);
+    if (hidden) hidden.value = value;
   };
   document.addEventListener('click', function (e) {
     if (!e.target.closest('.custom-select')) {
@@ -1070,13 +1075,25 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
       document.querySelectorAll('.cs-trigger').forEach(function  (t) { t.classList.remove('open'); });
     }
   });
-  window.submitForm = function () {
+  window.submitForm = function (e) {
+    e.preventDefault();
+    var form        = document.getElementById('enquiryForm');
     var formContent = document.getElementById('formContent');
     var formSuccess = document.getElementById('formSuccess');
-    formContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-    formContent.style.opacity    = '0';
-    formContent.style.transform  = 'translateY(-12px)';
-    setTimeout(function () { formContent.style.display = 'none'; formSuccess.classList.add('show'); }, 300);
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    })
+    .then(function () {
+      formContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      formContent.style.opacity    = '0';
+      formContent.style.transform  = 'translateY(-12px)';
+      setTimeout(function () { formContent.style.display = 'none'; formSuccess.classList.add('show'); }, 300);
+    })
+    .catch(function () {
+      alert('Something went wrong. Please try again or email sopo.fuifui@harcourts.co.nz directly.');
+    });
   };
   window.resetForm = function () {
     var formContent = document.getElementById('formContent');
