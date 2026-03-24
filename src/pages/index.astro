@@ -48,7 +48,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:76px;display:flex;ali
 .nav-links{display:flex;align-items:center;gap:36px;list-style:none;}
 .nav-links a{font-size:12px;font-weight:400;color:rgba(255,255,255,0.65);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.25s;}
 .nav-links a:hover{color:var(--blue);}
-.nav-cta{background:var(--blue)!important;color:var(--navy)!important;padding:10px 24px!important;border-radius:3px;font-weight:600!important;transition:background 0.25s!important;}
+.nav-cta{background:var(--blue)!important;color:var(--navy)!important;padding:10px 24px!important;border-radius:3px;font-weight:600!important;transition:background 0.25s!important;text-decoration:none!important;border-bottom:none!important;}
 .nav-cta:hover{background:#33BFFF!important;}
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;cursor:pointer;background:none;border:none;padding:6px;border-radius:3px;transition:background 0.2s;flex-shrink:0;}
 .hamburger:hover{background:rgba(255,255,255,0.07);}
@@ -70,7 +70,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:76px;display:flex;ali
 .mobile-menu.open ul li:nth-child(4){transition-delay:0.23s;}
 .mobile-menu ul li a{display:block;font-size:26px;font-family:'Cormorant Garamond',serif;font-weight:300;color:rgba(255,255,255,0.75);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);transition:color 0.2s;letter-spacing:0.02em;}
 .mobile-menu ul li a:hover{color:var(--blue);}
-.mobile-menu-cta{background:var(--blue);color:var(--navy);border:none;padding:16px 32px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;width:100%;opacity:0;transform:translateY(12px);transition:opacity 0.35s ease 0.3s,transform 0.35s ease 0.3s,background 0.25s;}
+.mobile-menu-cta{background:var(--blue);color:var(--navy);border:none;padding:16px 32px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;border-radius:3px;width:100%;opacity:0;transform:translateY(12px);transition:opacity 0.35s ease 0.3s,transform 0.35s ease 0.3s,background 0.25s;text-decoration:none;}
 .mobile-menu.open .mobile-menu-cta{opacity:1;transform:translateY(0);}
 .mobile-menu-cta:hover{background:#33BFFF;}
 .mobile-contact-row{display:flex;gap:12px;margin-top:16px;opacity:0;transform:translateY(12px);transition:opacity 0.35s ease 0.36s,transform 0.35s ease 0.36s;}
@@ -198,6 +198,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:76px;display:flex;ali
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 .dstatus-txt{font-size:11px;font-weight:500;color:var(--blue);letter-spacing:0.15em;text-transform:uppercase;}
 .dheader{padding:32px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:start;border-bottom:1px solid rgba(255,255,255,0.07);}
+.dheader-row{display:flex;align-items:center;justify-content:space-between;width:100%;gap:32px;}
 .d-eyebrow{font-size:11px;font-weight:400;color:var(--blue);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
 .d-eyebrow::before{content:'';width:18px;height:2px;background:var(--blue);border-radius:1px;display:block;}
 .d-addr{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:400;color:var(--white);line-height:1;margin-bottom:6px;}
@@ -395,13 +396,22 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
   .pcard.lg .pimg{height:340px;}
   .detail-wrap{padding:72px 0 60px;}
   .detail-inner{padding:0 28px;}
-  .dheader{grid-template-columns:1fr;}
+  .dheader{grid-template-columns:1fr;padding:24px;}
+  .dheader-row{flex-wrap:wrap;gap:16px;}
+  .dheader-row .btn-enq{width:100%!important;white-space:normal!important;}
   .d-price-col{text-align:left;}
   .dspecs{grid-template-columns:repeat(3,1fr);}
   .dgallery{grid-template-columns:1fr;grid-template-rows:260px 180px 180px;}
   .gcell.main{grid-row:auto;}
   .dbody{grid-template-columns:1fr;}
   .ddesc{border-right:none;border-bottom:1px solid rgba(255,255,255,0.07);}
+  .dtopbar{flex-wrap:wrap;gap:10px;padding:14px 24px;}
+  .dtopbar>div:last-child{width:100%;justify-content:flex-start;}
+  .dcrumb{font-size:11px;}
+  .dtour-hd{flex-wrap:wrap;gap:8px;}
+  .tview{height:180px;}
+  .dspec{padding:16px 14px;}
+  .dspec-val{font-size:22px;}
   .agent-sec{padding:72px 28px;}
   .agent-inner{grid-template-columns:1fr;}
   .aphoto{aspect-ratio:4/3;max-width:380px;}
@@ -420,10 +430,23 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
   .trust-items{gap:16px;}
   .trust-item{font-size:12px;}
   .section{padding:60px 20px;}
-  .detail-inner{padding:0 20px;}
-  .d-addr{font-size:32px;}
-  .d-price-num{font-size:34px;}
+  .detail-inner{padding:0 16px;}
+  .d-addr{font-size:28px;}
+  .d-price-num{font-size:30px;}
   .dspecs{grid-template-columns:repeat(2,1fr);}
+  .dtopbar{padding:12px 16px;}
+  .dcrumb{display:none;}
+  .dheader{padding:20px 16px;}
+  .ddesc{padding:20px 16px;}
+  .dtour{padding:20px 16px;}
+  .tview{height:160px;}
+  .trooms{gap:5px;}
+  .rmbtn{font-size:10px;padding:5px 10px;}
+  .dspecs .dspec{padding:12px 10px;}
+  .dspecs .dspec-val{font-size:18px;}
+  .dspecs .dspec-lbl{font-size:9px;}
+  .dfeats{grid-template-columns:1fr;}
+  .dbody{overflow:hidden;}
   .form-row{grid-template-columns:1fr;}
   .agent-sec{padding:60px 20px;}
   .aname{font-size:48px;}
@@ -450,23 +473,23 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="#listings">Listings</a></li>
+    <li><a href="https://hamiltonhomes.netlify.app/listings/">Listings</a></li>
     <li><a href="#tours">360° Tours</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#contact" class="nav-cta">Enquire</a></li>
+    <li><a href="#contact" class="nav-cta" style="text-decoration:none;">Enquire</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
   <ul>
-    <li><a href="#listings" class="mobile-link">Listings</a></li>
+    <li><a href="https://hamiltonhomes.netlify.app/listings/" class="mobile-link">Listings</a></li>
     <li><a href="#tours" class="mobile-link">360° Tours</a></li>
     <li><a href="#about" class="mobile-link">About</a></li>
     <li><a href="#contact" class="mobile-link">Contact</a></li>
   </ul>
-  <a href="#contact" class="mobile-menu-cta mobile-link" style="text-align:center;display:block;">Enquire Now</a>
+  <a href="#contact" class="mobile-menu-cta mobile-link" style="text-align:center;display:block;text-decoration:none;">Enquire Now</a>
   <div class="mobile-contact-row">
     <a href="tel:02102667154" class="mobile-contact-link mobile-link">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>Call
@@ -660,7 +683,7 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
         </div>
       </div>
       <div class="dheader">
-        <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:32px;">
+        <div class="dheader-row">
           <div>
             <div class="d-eyebrow">Nawton · Hamilton 3200</div>
             <div class="d-addr">12A Karaka Street</div>
@@ -990,7 +1013,7 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
       <div>
         <div class="fch">Explore</div>
         <ul class="flinks">
-          <li><a href="#listings">Current Listings</a></li>
+          <li><a href="https://hamiltonhomes.netlify.app/listings/">Current Listings</a></li>
           <li><a href="/sold">Recently Sold</a></li>
           <li><a href="#tours">360° Virtual Tours</a></li>
           <li><a href="#tours">Open Home Schedule</a></li>
