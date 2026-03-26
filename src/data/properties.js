@@ -16,7 +16,7 @@ export const properties = [
     suburb:    "Silverdale",
     city:      "Hamilton",
     postcode:  "3216",
-    price:     "Auction 9th April 2026",
+    price:     "Auction 9th April 2026 (Unless Sold Prior)",
     bedrooms:  4,
     bathrooms: 1,
     parking:   2,
@@ -57,6 +57,7 @@ export const properties = [
     ],
 
     tourUrl:  "https://kuula.co/share/collection/7MKn9?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1",
+    mapUrl:   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3740.0293381492147!2d175.3287081!3d-37.7910808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d6d1930aec8b3cf%3A0x1f553506e6473bfa!2s8%20Dalesford%20Street%2C%20Silverdale%2C%20Hamilton%203216!5e1!3m2!1sen!2snz!4v1774516125927!5m2!1sen!2snz",
     openHome: null,
     // openHome: { date: "Sunday 30 March", time: "1:00 pm – 1:30 pm" },
   },

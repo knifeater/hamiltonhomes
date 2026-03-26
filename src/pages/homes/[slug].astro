@@ -18,6 +18,7 @@ const hasTour     = !!p.tourUrl;
 const hasDesc     = p.description && p.description.length > 0;
 const hasFeatures = p.features  && p.features.length  > 0;
 const hasSpecs    = p.floorArea || p.landArea || p.tenure;
+const hasMap      = !!p.mapUrl;
 
 // Card status helpers for other listings
 function otherStatusLabel(s) {
@@ -152,7 +153,6 @@ function otherStatusClass(s) {
     .spec-icon{color:var(--blue);flex-shrink:0;}
     .spec-val{font-size:16px;font-weight:600;color:var(--navy);line-height:1;}
     .spec-lbl{font-size:10px;font-weight:400;color:var(--muted);letter-spacing:.1em;margin-top:2px;}
-    /* Fade edge — mobile only, hidden via JS once scrolled */
     .specs-fade{display:none;position:absolute;top:0;right:0;bottom:0;width:72px;pointer-events:none;background:linear-gradient(to right,transparent,var(--off) 80%);transition:opacity .3s;z-index:2;}
     .specs-swipe-hint{display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);z-index:3;align-items:center;gap:4px;background:var(--navy);color:rgba(255,255,255,.75);font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px 5px 8px;border-radius:20px;border:1px solid rgba(0,174,239,.25);pointer-events:none;transition:opacity .4s;}
     .specs-swipe-hint svg{color:var(--blue);}
@@ -248,6 +248,15 @@ function otherStatusClass(s) {
     .suc-msg{font-size:13px;color:var(--muted);line-height:1.7;max-width:240px;}
     .suc-reset{background:none;border:1px solid var(--bdr);border-radius:3px;padding:10px 20px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--blue);cursor:pointer;letter-spacing:.1em;text-transform:uppercase;transition:border-color .2s,background .2s;}
     .suc-reset:hover{border-color:var(--blue);background:var(--bpale);}
+
+    /* MAP CARD */
+    .map-card{background:#fff;border:1px solid var(--bdr);border-radius:5px;overflow:hidden;}
+    .map-card-head{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bdr);}
+    .map-card-title{font-size:12px;font-weight:700;color:var(--navy);letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
+    .map-card-title::before{content:'';display:block;width:3px;height:15px;background:var(--blue);border-radius:2px;flex-shrink:0;}
+    .map-card-sub{font-size:10px;font-weight:400;color:var(--muted);letter-spacing:.06em;}
+    .map-card iframe{display:block;width:100%;border:none;}
+
     .agent-card{background:#fff;border:1px solid var(--bdr);border-radius:5px;overflow:hidden;}
     .agt{background:var(--navy);padding:18px 20px;display:flex;align-items:center;gap:14px;border-bottom:2px solid var(--blue);}
     .ava{width:50px;height:50px;border-radius:50%;background:linear-gradient(160deg,#253570,#162040);border:2px solid rgba(0,174,239,.4);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;}
@@ -303,7 +312,6 @@ function otherStatusClass(s) {
     .lcard:hover .lcard-cta{color:var(--blue);}
     .lcard-cta svg{transition:transform .2s;}
     .lcard:hover .lcard-cta svg{transform:translateX(3px);}
-    /* CTA card (dark) */
     .lcard-cta-card{background:var(--navy);border-color:var(--navy);cursor:pointer;}
     .lcard-cta-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(22,32,64,.25);}
 
@@ -352,8 +360,6 @@ function otherStatusClass(s) {
     }
     @media(max-width:680px){
       nav{padding:0 16px;}
-
-      /* Address strip — compact on mobile */
       .addr-strip{margin-top:76px;}
       .addr-inner{padding:8px 16px;flex-direction:column;gap:6px;align-items:flex-start;}
       .addr-bc{font-size:10px;margin-bottom:3px;gap:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;flex-wrap:nowrap;}
@@ -362,51 +368,33 @@ function otherStatusClass(s) {
       .addr-price{text-align:left;}
       .price-lbl{font-size:9px;}
       .price-val{font-size:clamp(20px,5vw,28px);}
-
-      /* Hero */
       .listing-hero{grid-template-columns:1fr;grid-template-rows:240px;}
       .gc:not(.main){display:none;}
       .gc.main{grid-row:auto;}
-
-      /* Body */
       .body-inner{padding:0;}
       .page-body{padding:16px 0 0;}
       .content-col{padding:0 16px;gap:12px;}
       .sidebar-col{padding:0 16px 24px;}
-
-      /* Cards */
       .card-head{padding:14px 16px 0;}
       .card-body{padding:12px 16px 20px;}
-
-      /* Key features — single column, no orphan padding */
       .feat-grid{grid-template-columns:1fr;}
       .fi{padding:10px 0;border-right:none !important;padding-right:0 !important;padding-left:0 !important;}
       .fi:nth-child(odd){padding-right:0;border-right:none;}
       .fi:nth-child(even){padding-left:0;}
       .fi:nth-last-child(-n+2){border-bottom:1px solid var(--bdr);}
       .fi:last-child{border-bottom:none;}
-
-      /* Property details table */
       .dtable td{font-size:12.5px;padding:9px 0;}
       .dtable td:first-child{width:45%;}
-
-      /* Gallery strip */
       .gstrip{margin:0 0 20px;grid-template-columns:1fr 1fr;}
       .tour-wrap{margin:0 0 20px;}
-
-      /* Enquiry form */
       .enq-top{padding:16px 16px 14px;}
       .enq-pval{font-size:28px;}
       .enq-form{padding:14px 16px 18px;}
       .f2{grid-template-columns:1fr;}
       .enq-card{border-radius:4px;}
-
-      /* Other listings */
       .other-inner{padding-left:16px;padding-right:16px;}
       .other-wrap{padding:40px 0 52px;}
       .listings-grid{grid-template-columns:1fr;}
-
-      /* Footer */
       footer{padding:40px 16px 0;}
       .ftop{grid-template-columns:1fr;gap:28px;}
       .fbot-main{flex-direction:column;align-items:flex-start;gap:8px;padding:16px 0 20px;}
@@ -424,14 +412,12 @@ function otherStatusClass(s) {
 
 <!-- NAV -->
 <nav>
-  <!-- CHANGE 1: .nav-left is now an <a> tag linking to the homepage -->
   <a href="https://hamiltonhomes.netlify.app/" class="nav-left">
     <div class="hc-mark"><div class="hc-word">Harcourts</div><div class="hc-bar"></div></div>
     <div class="nav-sep"></div>
     <div><div class="nav-agent-name">Sopo Fuifui</div><div class="nav-agent-role">Licensed Sales Consultant</div></div>
   </a>
   <ul class="nav-links">
-    <!-- CHANGE 2: Listings links to the full listings URL -->
     <li><a href="https://hamiltonhomes.netlify.app/listings/">Listings</a></li>
     <li><a href="/#tours">360° Tours</a></li>
     <li><a href="/#about">About</a></li>
@@ -630,6 +616,8 @@ function otherStatusClass(s) {
     </div><!-- /content-col -->
 
     <aside class="sidebar-col">
+
+      <!-- ENQUIRY CARD -->
       <div class="enq-card">
         <div class="enq-top">
           <div class="enq-plbl">{priceLabel}</div>
@@ -680,6 +668,25 @@ function otherStatusClass(s) {
         </div>
       </div>
 
+      <!-- GOOGLE MAP (only shown if mapUrl is set in properties.js) -->
+      {hasMap && (
+        <div class="map-card">
+          <div class="map-card-head">
+            <div class="map-card-title">Location</div>
+            <div class="map-card-sub">{p.suburb}, {p.city}</div>
+          </div>
+          <iframe
+            src={p.mapUrl}
+            width="100%"
+            height="280"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      )}
+
+      <!-- AGENT CARD -->
       <div class="agent-card">
         <div class="agt">
           <div class="ava">
@@ -754,7 +761,6 @@ function otherStatusClass(s) {
         </a>
       ))}
 
-      <!-- Always show the appraisal CTA as the final card -->
       <a href="/#contact" class="lcard lcard-cta-card">
         <div class="lcard-img" style="background:linear-gradient(145deg,#1E3A6A,#0B1428);">
           <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(0,174,239,.05) 0,rgba(0,174,239,.05) 1px,transparent 1px,transparent 48px),repeating-linear-gradient(90deg,rgba(0,174,239,.05) 0,rgba(0,174,239,.05) 1px,transparent 1px,transparent 48px);"></div>
@@ -835,12 +841,11 @@ function otherStatusClass(s) {
       hint.style.opacity=(atEnd||moved)?'0':'1';
     }
     scroll.addEventListener('scroll',update,{passive:true});
-    // Check on load in case content fits without scrolling
     setTimeout(function(){
       var canScroll=scroll.scrollWidth>scroll.clientWidth+4;
       if(!canScroll){fade.style.opacity='0';hint.style.opacity='0';}
     },100);
-  })();;
+  })();
 
   /* ── LIGHTBOX ── */
   var lb=document.getElementById('lb');
@@ -879,7 +884,6 @@ function otherStatusClass(s) {
       img.src=gallery[idx].src;
       img.alt=gallery[idx].alt||('Photo '+(idx+1));
       img.onload=function(){img.classList.add('visible');};
-      // If cached, onload may not fire
       if(img.complete){img.classList.add('visible');}
       current=idx;
       updateUI();
@@ -892,7 +896,6 @@ function otherStatusClass(s) {
     buildDots();
     lb.classList.add('open');
     document.body.style.overflow='hidden';
-    // Load image without transition delay on first open
     lbImg.classList.remove('visible');
     lbImg.src=gallery[current].src;
     lbImg.alt=gallery[current].alt||('Photo '+(current+1));
@@ -913,7 +916,6 @@ function otherStatusClass(s) {
     lbGoto(next);
   };
 
-  /* Keyboard navigation */
   document.addEventListener('keydown',function(e){
     if(!lb.classList.contains('open')){return;}
     if(e.key==='ArrowLeft'){lbStep(-1);}
@@ -921,7 +923,6 @@ function otherStatusClass(s) {
     else if(e.key==='Escape'){lbClose();}
   });
 
-  /* Touch swipe */
   var touchStartX=0;
   lb.addEventListener('touchstart',function(e){touchStartX=e.touches[0].clientX;},{passive:true});
   lb.addEventListener('touchend',function(e){
