@@ -59,6 +59,48 @@ export const properties = [
     // openHome: { date: "Sunday 30 March", time: "1:00 pm – 1:30 pm" },
   },
 
+  {
+    slug:      "8-dalesford-street",
+    status:    "for-sale",
+    title:     "8 Dalesford Street",
+    suburb:    "Silverdale",
+    city:      "Hamilton",
+    postcode:  "3216",
+    price:     "Auction 9th April 2026",
+    bedrooms:  4,
+    bathrooms: 1,
+    parking:   2,
+
+    floorArea: null,
+    landArea:  690,
+    tenure:    "Freehold",
+
+    description: [
+      "First time ever on the market, this much-loved generational family home is now ready for its next exciting chapter. Whether you're a growing family, savvy investor, or flipper looking for strong returns, this property offers endless potential you won't want to miss.",
+      "Featuring 4 generous bedrooms plus versatile living spaces, a spacious kitchen and dining area with scope to modernise, a large lounge capturing plenty of natural light, double garage with off-street parking, and a freehold section with room for kids, pets, or future landscaping.",
+      "With solid bones and so much scope to renovate, refresh, or redevelop, this is a golden opportunity in an excellent location close to schools, shops, transport, and parks. Estate sale — must sell. Properties like this don't come up often, act quickly!",
+    ],
+
+    features: [
+      "Estate sale — first time on the market",
+      "4 generous bedrooms",
+      "Separate lounge with natural light",
+      "Spacious kitchen and dining",
+      "Double garage + off-street parking",
+      "Freehold 690m² section",
+      "Brick/masonry veneer exterior",
+      "Close to schools, shops, and parks",
+    ],
+
+    gallery: [
+      // { src: "/images/8-dalesford-1.jpg", alt: "Front of property" },
+    ],
+
+    tourUrl:  "https://kuula.co/share/collection/7MKn9?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1",
+    openHome: null,
+    // openHome: { date: "Sunday 30 March", time: "1:00 pm – 1:30 pm" },
+  },
+
   // ── SOLD PROPERTIES ───────────────────────────────────────────────────────
 
   {
