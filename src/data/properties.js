@@ -16,7 +16,7 @@ export const properties = [
     suburb:    "Silverdale",
     city:      "Hamilton",
     postcode:  "3216",
-    price:     "Auction 9th April 2026 (Unless Sold Prior)",
+    price:     "Auction 9th April 2026",
     bedrooms:  4,
     bathrooms: 1,
     parking:   2,
