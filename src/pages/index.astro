@@ -39,13 +39,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--te
 
 /* ========================= NAV ========================= */
 nav{position:fixed;top:0;left:0;right:0;z-index:300;height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 56px;background:var(--navy);border-bottom:2px solid var(--blue);}
-.nav-left{display:flex;align-items:center;gap:20px;}
+.nav-left{display:flex;align-items:center;gap:20px;transition:opacity 0.25s;}
+.nav-left:hover{opacity:0.82;}
+.nav-left:hover .nav-brand-name{color:var(--blue);}
+.nav-left img{transition:opacity 0.25s;}
 .hc-mark{display:flex;flex-direction:column;gap:3px;}
 .hc-word{font-size:20px;font-weight:700;color:var(--white);letter-spacing:-0.01em;line-height:1;}
 .hc-bar{width:26px;height:3px;background:var(--blue);border-radius:1px;}
-.nav-sep{width:1px;height:32px;background:rgba(255,255,255,0.15);}
+.nav-sep{width:1px;height:42px;background:rgba(255,255,255,0.18);}
 .nav-agent-name{font-size:14px;font-weight:600;color:var(--white);}
 .nav-agent-role{font-size:10px;font-weight:300;color:var(--blue);letter-spacing:0.18em;text-transform:uppercase;}
+.nav-brand-name{font-size:18px;font-weight:700;color:var(--white);letter-spacing:0.01em;line-height:1.1;transition:color 0.25s;}
+.nav-brand-sub{font-size:10px;font-weight:400;color:var(--blue);letter-spacing:0.32em;text-transform:uppercase;margin-top:3px;opacity:0.85;}
 .nav-links{display:flex;align-items:center;gap:36px;list-style:none;}
 .nav-links a{font-size:12px;font-weight:400;color:rgba(255,255,255,0.65);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.25s;}
 .nav-links a:hover{color:var(--blue);}
@@ -366,8 +371,9 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
 .fmp a:hover{color:#33BFFF;opacity:1;}
 .fhc{display:flex;align-items:center;gap:10px;}
 .fhc-txt{font-size:10px;font-weight:300;color:rgba(255,255,255,0.18);letter-spacing:0.1em;text-transform:uppercase;}
-.fhc-logo{font-size:13px;font-weight:700;color:rgba(255,255,255,0.44);line-height:1;}
-.fhc-ln{width:16px;height:2px;background:var(--blue);border-radius:1px;opacity:0.55;margin-top:3px;}
+.fhc-brand{display:flex;align-items:center;gap:8px;}
+.fhc-pentagon{flex-shrink:0;}
+.fhc-logo{font-size:13px;font-weight:700;color:rgba(255,255,255,0.55);line-height:1;letter-spacing:0.02em;}
 
 /* ========================= RESPONSIVE ========================= */
 @media(max-width:1024px){
@@ -450,16 +456,16 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
 
 <!-- ===================== NAV ===================== -->
 <nav>
-  <a href="https://hamiltonhomes.netlify.app/" class="nav-left" style="text-decoration:none;">
+  <a href="https://hamiltonhomes.nz/" class="nav-left" style="text-decoration:none;">
     <img src="/images/HamiltonHomes_header.png" alt="Hamilton Homes" style="height:44px;width:auto;display:block;" />
     <div class="nav-sep"></div>
     <div>
-      <div class="nav-agent-name">Sopo Fuifui</div>
-      <div class="nav-agent-role">Licensed Sales Consultant</div>
+      <div class="nav-brand-name">Hamilton Homes</div>
+      <div class="nav-brand-sub">New Zealand</div>
     </div>
   </a>
   <ul class="nav-links">
-    <li><a href="https://hamiltonhomes.netlify.app/listings/">Listings</a></li>
+    <li><a href="https://hamiltonhomes.nz/listings/">Listings</a></li>
     <li><a href="#tours">360° Tours</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -470,7 +476,7 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
 
 <div class="mobile-menu" id="mobileMenu">
   <ul>
-    <li><a href="https://hamiltonhomes.netlify.app/listings/" class="mobile-link">Listings</a></li>
+    <li><a href="https://hamiltonhomes.nz/listings/" class="mobile-link">Listings</a></li>
     <li><a href="#tours" class="mobile-link">360° Tours</a></li>
     <li><a href="#about" class="mobile-link">About</a></li>
     <li><a href="#contact" class="mobile-link">Contact</a></li>
@@ -511,7 +517,7 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
         <div><div class="h-stat-num">8<span>★</span></div><div class="h-stat-lbl">Client Reviews</div></div>
         <div><div class="h-stat-num">5<span>★</span></div><div class="h-stat-lbl">Average Rating</div></div>
       </div>
-      <a href="https://hamiltonhomes.netlify.app/listings/" class="hero-card-bot" style="text-decoration:none;"><div class="hcb-txt">See current listings</div><div class="hcb-arrow">→</div></a>
+      <a href="https://hamiltonhomes.nz/listings/" class="hero-card-bot" style="text-decoration:none;"><div class="hcb-txt">See current listings</div><div class="hcb-arrow">→</div></a>
     </div>
   </div>
   <div class="scroll-hint"><div class="scroll-line"></div>Scroll to explore</div>
@@ -1008,14 +1014,14 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
   <div class="footer-inner">
     <div class="ftop">
       <div>
-        <div class="fln">Sopo <em>Fuifui</em></div>
-        <div class="fls">Licensed Sales Consultant · Hamilton Homes</div>
+        <div class="fln">Hamilton <em>Homes</em></div>
+        <div class="fls">New Zealand</div>
         <p class="fbio">Helping families across Hamilton, Ngāruawāhia, and Raglan buy and sell homes with honesty, integrity, and genuine care.</p>
       </div>
       <div>
         <div class="fch">Explore</div>
         <ul class="flinks">
-          <li><a href="https://hamiltonhomes.netlify.app/listings/">Current Listings</a></li>
+          <li><a href="https://hamiltonhomes.nz/listings/">Current Listings</a></li>
           <li><a href="/sold">Recently Sold</a></li>
           <li><a href="#tours">360° Virtual Tours</a></li>
           <li><a href="#tours">Open Home Schedule</a></li>
@@ -1044,7 +1050,7 @@ footer{background:var(--navy);padding:64px 80px 0;border-top:3px solid var(--blu
       <div class="fbot-main">
         <div class="fcopy">© 2026 Sopo Fuifui. Licensed REAA 2008. All rights reserved.</div>
         <div class="fmp">Proudly designed and powered by <a href="https://www.themarketplace.co.nz/" target="_blank" rel="noopener">The Marketplace New Zealand</a></div>
-        <div class="fhc"><div class="fhc-txt">In association with</div><div><div class="fhc-logo">Hamilton Homes</div><div class="fhc-ln"></div></div></div>
+        <div class="fhc"></div>
       </div>
     </div>
   </div>
